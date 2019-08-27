@@ -31,9 +31,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Treshno needs to access location to get your current location.</string>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>CameraSB</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Accounts</string>
+	<string>CameraSB</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
