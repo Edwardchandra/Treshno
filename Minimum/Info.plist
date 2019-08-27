@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Treshno needs to access camera to take waste photo.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -23,11 +25,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Minimum needs to access location to get your current location.</string>
+	<string>Treshno needs to access location to get your current location.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Minimum needs to access location to get your current location.</string>
+	<string>Treshno needs to access location to get your current location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Minimum needs to access location to get your current location.</string>
+	<string>Treshno needs to access location to get your current location.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

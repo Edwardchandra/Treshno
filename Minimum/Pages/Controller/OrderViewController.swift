@@ -126,6 +126,7 @@ class OrderViewController: UIViewController, UIImagePickerControllerDelegate, UI
             let destination = segue.destination as! OngoingOrderViewController
             destination.latPinPoint = latitudeData
             destination.longPinPoint = longitudeData
+            destination.image = wasteImageView.image!
         }
         
     }

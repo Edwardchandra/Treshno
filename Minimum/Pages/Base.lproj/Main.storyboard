@@ -284,12 +284,91 @@
                         <outlet property="wasteCollectorName" destination="PRD-BI-cEx" id="hCD-Yf-uTc"/>
                         <outlet property="wasteCollectorNumber" destination="oh4-Da-5CS" id="QiE-Uq-ugB"/>
                         <segue destination="HtE-EN-so0" kind="unwind" identifier="unwindToMainSegue" unwindAction="unwindToMainWithSegue:" id="PCL-pN-5RJ"/>
+                        <segue destination="WeZ-Hs-81q" kind="show" identifier="orderReviewSegue" id="DDv-UZ-j9b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Weh-LI-4QH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HtE-EN-so0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2729" y="865"/>
+        </scene>
+        <!--Order Review View Controller-->
+        <scene sceneID="g30-KP-BcO">
+            <objects>
+                <viewController id="WeZ-Hs-81q" customClass="OrderReviewViewController" customModule="Minimum" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0V0-HS-Icn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alamat Pengambilan Sampah:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJj-6R-TBL">
+                                <rect key="frame" x="20" y="188" width="239" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sampah Anda Telah Diambil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWZ-tU-jpT">
+                                <rect key="frame" x="20" y="106" width="316" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tidak Ada Alamat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVQ-qc-RVm">
+                                <rect key="frame" x="20" y="217" width="374" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="addImage" translatesAutoresizingMaskIntoConstraints="NO" id="oQS-jW-prl">
+                                <rect key="frame" x="20" y="256" width="374" height="214"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="oleh:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZO4-kL-hOP">
+                                <rect key="frame" x="20" y="144" width="38" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pak Daluri" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lji-9v-DId">
+                                <rect key="frame" x="63" y="144" width="77" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOK-TD-cfH">
+                                <rect key="frame" x="20" y="818" width="374" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.86555814740000003" green="0.35901677609999999" blue="0.16835823659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Selesai">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishAction:" destination="7VP-Ix-7nj" eventType="touchUpInside" id="roX-M9-gii"/>
+                                    <action selector="finishAction:" destination="WeZ-Hs-81q" eventType="touchUpInside" id="vmu-mJ-CQ4"/>
+                                    <action selector="getCurrentLocation:" destination="cwE-5I-rDF" eventType="touchUpInside" id="kth-Wk-9Je"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Bh3-hf-Ami"/>
+                    </view>
+                    <connections>
+                        <outlet property="finishButton" destination="SOK-TD-cfH" id="SQA-Uh-vWw"/>
+                        <outlet property="pickUpLocation" destination="VVQ-qc-RVm" id="IkY-jb-L2X"/>
+                        <outlet property="wasteCollectorName" destination="Lji-9v-DId" id="iGn-Je-xhk"/>
+                        <outlet property="wasteImageView" destination="oQS-jW-prl" id="g0s-Sm-grg"/>
+                        <segue destination="ci3-43-0FK" kind="unwind" identifier="unwindMainSegue" unwindAction="unwindToMainWithSegue:" id="2vH-1V-eH9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Atp-Sd-klY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ci3-43-0FK" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3763.7681159420295" y="864.50892857142856"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="9bV-JM-Jhv">
@@ -335,7 +414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8k-u4-InD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3672" y="865"/>
+            <point key="canvasLocation" x="3765" y="138"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Em9-eZ-htg">

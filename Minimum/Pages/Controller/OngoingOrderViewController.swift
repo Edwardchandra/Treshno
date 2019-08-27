@@ -44,6 +44,11 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     var latCurrent : Double = 0.0
     var longCurrent : Double = 0.0
     
+    var sourceLocationData: String = ""
+    var destinationLocationData: String = ""
+    
+    var image: UIImage = UIImage(named: "Launch")!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -95,6 +100,22 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
         
 //        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
+        
+        fetchCityAndCountry(from: CLLocation(latitude: sourceLocation.latitude, longitude: sourceLocation.longitude)) { subStreet, street, city, country, error in
+            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
+            print(subStreet + ", " + street + ", " + city + ", " + country)
+            
+            self.sourceLocationData = subStreet + ", " + street + ", " + city + ", " + country
+            
+        }
+        
+        fetchCityAndCountry(from: CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)) { subStreet, street, city, country, error in
+            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
+            print(subStreet + ", " + street + ", " + city + ", " + country)
+            
+            self.destinationLocationData = subStreet + ", " + street + ", " + city + ", " + country
+            
+        }
         
         let pointDestination = MKPointAnnotation()
         pointDestination.coordinate = CLLocationCoordinate2D(
@@ -276,7 +297,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         let alert = UIAlertController(title: "Konfirmasi", message: "Apakah anda ingin menyelesaikan pesanan anda?", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
-            self.performSegue(withIdentifier: "unwindToMainSegue", sender: self)
+            self.performSegue(withIdentifier: "orderReviewSegue", sender: self)
         }
         
         let cancelAction = UIAlertAction(title: "Batal", style: .cancel, handler: nil)
@@ -286,6 +307,16 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ subStreet: String?, _ street: String?, _ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            completion(placemarks?.first?.subThoroughfare,
+                       placemarks?.first?.thoroughfare,
+                       placemarks?.first?.locality,
+                       placemarks?.first?.country,
+                       error)
+        }
     }
     
     func customizeElement(){
@@ -300,4 +331,17 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         finishButton.layer.opacity = 0.5
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "orderReviewSegue"{
+            
+            let destination = segue.destination as! OrderReviewViewController
+            destination.source = sourceLocationData
+            destination.destination = destinationLocationData
+            destination.wasteImage = image
+            destination.wasteCollector = wasteCollectorName.text!
+        }
+        
+    }
+    
 }
