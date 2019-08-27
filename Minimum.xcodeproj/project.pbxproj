@@ -11,6 +11,8 @@
 		043BE130230EB2C3004D12B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE12E230EB2C3004D12B1 /* Main.storyboard */; };
 		043BE132230EB2C5004D12B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043BE131230EB2C5004D12B1 /* Assets.xcassets */; };
 		043BE135230EB2C5004D12B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE133230EB2C5004D12B1 /* LaunchScreen.storyboard */; };
+		04F1B3BE2315820400864E46 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F1B3BD2315820400864E46 /* Camera.storyboard */; };
+		04F1B3C02315821000864E46 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F1B3BF2315821000864E46 /* CameraViewController.swift */; };
 		B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */; };
 		B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */; };
 		B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69E19A52314E9FB00E33D06 /* Onboard.xib */; };
@@ -36,6 +38,8 @@
 		043BE131230EB2C5004D12B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		043BE134230EB2C5004D12B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		043BE136230EB2C5004D12B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F1B3BD2315820400864E46 /* Camera.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
+		04F1B3BF2315821000864E46 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerAnnotationView.swift; sourceTree = "<group>"; };
 		B69E19A52314E9FB00E33D06 /* Onboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Onboard.xib; sourceTree = "<group>"; };
@@ -96,6 +100,15 @@
 				043BE136230EB2C5004D12B1 /* Info.plist */,
 			);
 			path = Minimum;
+			sourceTree = "<group>";
+		};
+		04F1B3BC231581DB00864E46 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				04F1B3BD2315820400864E46 /* Camera.storyboard */,
+				04F1B3BF2315821000864E46 /* CameraViewController.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		B625A9E2230F414400915B0A /* View */ = {
@@ -176,6 +189,7 @@
 		FCCA2A39230EB890007E6C8E /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				04F1B3BC231581DB00864E46 /* New Group */,
 				B6DAD0332313212900668E60 /* Accounts */,
 				B625A9E2230F414400915B0A /* View */,
 				FCCA2A3F230EB8C2007E6C8E /* Controller */,
@@ -275,6 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */,
+				04F1B3BE2315820400864E46 /* Camera.storyboard in Resources */,
 				043BE135230EB2C5004D12B1 /* LaunchScreen.storyboard in Resources */,
 				043BE132230EB2C5004D12B1 /* Assets.xcassets in Resources */,
 				B6DAD0362313215800668E60 /* Accounts.storyboard in Resources */,
@@ -300,6 +315,7 @@
 				B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */,
 				B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */,
 				B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */,
+				04F1B3C02315821000864E46 /* CameraViewController.swift in Sources */,
 				FCCA2A45230EB97C007E6C8E /* LocationViewController.swift in Sources */,
 				B6DAD0432313C2CB00668E60 /* OngoingOrderViewController.swift in Sources */,
 				B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */,
