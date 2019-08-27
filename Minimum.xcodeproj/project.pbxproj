@@ -13,6 +13,15 @@
 		043BE135230EB2C5004D12B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE133230EB2C5004D12B1 /* LaunchScreen.storyboard */; };
 		B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */; };
 		B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */; };
+		B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69E19A52314E9FB00E33D06 /* Onboard.xib */; };
+		B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E19A92314EB3E00E33D06 /* Onboard.swift */; };
+		B6DAD03123131EA600668E60 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD02F23131EA600668E60 /* LogInViewController.swift */; };
+		B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD03023131EA600668E60 /* SignUpViewController.swift */; };
+		B6DAD0362313215800668E60 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DAD0342313215800668E60 /* Accounts.storyboard */; };
+		B6DAD03B2313219300668E60 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD03A2313219300668E60 /* OnboardViewController.swift */; };
+		B6DAD03F231321A500668E60 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6DAD03E231321A500668E60 /* CloudKit.framework */; };
+		B6DAD0432313C2CB00668E60 /* OngoingOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD0422313C2CB00668E60 /* OngoingOrderViewController.swift */; };
+		B6DAD04523145F2100668E60 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD04423145F2100668E60 /* OrderViewController.swift */; };
 		FCCA2A41230EB8FD007E6C8E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA2A40230EB8FD007E6C8E /* MainViewController.swift */; };
 		FCCA2A43230EB916007E6C8E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA2A42230EB916007E6C8E /* MapViewController.swift */; };
 		FCCA2A45230EB97C007E6C8E /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA2A44230EB97C007E6C8E /* LocationViewController.swift */; };
@@ -28,6 +37,16 @@
 		043BE136230EB2C5004D12B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerAnnotationView.swift; sourceTree = "<group>"; };
+		B69E19A52314E9FB00E33D06 /* Onboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Onboard.xib; sourceTree = "<group>"; };
+		B69E19A92314EB3E00E33D06 /* Onboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
+		B6DAD02F23131EA600668E60 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		B6DAD03023131EA600668E60 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B6DAD0352313215800668E60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Minimum/Pages/Base.lproj/Accounts.storyboard; sourceTree = "<group>"; };
+		B6DAD03A2313219300668E60 /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		B6DAD03C231321A300668E60 /* Minimum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minimum.entitlements; sourceTree = "<group>"; };
+		B6DAD03E231321A500668E60 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		B6DAD0422313C2CB00668E60 /* OngoingOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingOrderViewController.swift; sourceTree = "<group>"; };
+		B6DAD04423145F2100668E60 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		FCCA2A40230EB8FD007E6C8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FCCA2A42230EB916007E6C8E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FCCA2A44230EB97C007E6C8E /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6DAD03F231321A500668E60 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +70,7 @@
 			children = (
 				043BE129230EB2C3004D12B1 /* Minimum */,
 				043BE128230EB2C3004D12B1 /* Products */,
+				B6DAD03D231321A500668E60 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +85,7 @@
 		043BE129230EB2C3004D12B1 /* Minimum */ = {
 			isa = PBXGroup;
 			children = (
+				B6DAD03C231321A300668E60 /* Minimum.entitlements */,
 				FCCA2A3A230EB896007E6C8E /* Utils */,
 				FCCA2A39230EB890007E6C8E /* Pages */,
 				043BE12A230EB2C3004D12B1 /* AppDelegate.swift */,
@@ -77,17 +99,63 @@
 		B625A9E2230F414400915B0A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B69E19A52314E9FB00E33D06 /* Onboard.xib */,
+				B69E19A92314EB3E00E33D06 /* Onboard.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B6DAD0332313212900668E60 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				B6DAD0392313216B00668E60 /* Controller */,
+				B6DAD0382313216700668E60 /* View */,
+				B6DAD0372313216100668E60 /* Model */,
+				B6DAD0342313215800668E60 /* Accounts.storyboard */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		B6DAD0372313216100668E60 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B6DAD0382313216700668E60 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B6DAD0392313216B00668E60 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B6DAD02F23131EA600668E60 /* LogInViewController.swift */,
+				B6DAD03023131EA600668E60 /* SignUpViewController.swift */,
+				B6DAD03A2313219300668E60 /* OnboardViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B6DAD03D231321A500668E60 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6DAD03E231321A500668E60 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FCCA2A39230EB890007E6C8E /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				B6DAD0332313212900668E60 /* Accounts */,
 				B625A9E2230F414400915B0A /* View */,
-				043BE12E230EB2C3004D12B1 /* Main.storyboard */,
 				FCCA2A3F230EB8C2007E6C8E /* Controller */,
 				FCCA2A3D230EB8AA007E6C8E /* Model */,
+				043BE12E230EB2C3004D12B1 /* Main.storyboard */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -131,6 +199,8 @@
 				FCCA2A42230EB916007E6C8E /* MapViewController.swift */,
 				FCCA2A44230EB97C007E6C8E /* LocationViewController.swift */,
 				FCCA2A46230EB9D2007E6C8E /* CompletedViewController.swift */,
+				B6DAD0422313C2CB00668E60 /* OngoingOrderViewController.swift */,
+				B6DAD04423145F2100668E60 /* OrderViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -167,6 +237,14 @@
 				TargetAttributes = {
 					043BE126230EB2C3004D12B1 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -193,8 +271,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */,
 				043BE135230EB2C5004D12B1 /* LaunchScreen.storyboard in Resources */,
 				043BE132230EB2C5004D12B1 /* Assets.xcassets in Resources */,
+				B6DAD0362313215800668E60 /* Accounts.storyboard in Resources */,
 				043BE130230EB2C3004D12B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,12 +286,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6DAD03B2313219300668E60 /* OnboardViewController.swift in Sources */,
 				043BE12B230EB2C3004D12B1 /* AppDelegate.swift in Sources */,
+				B6DAD04523145F2100668E60 /* OrderViewController.swift in Sources */,
 				FCCA2A43230EB916007E6C8E /* MapViewController.swift in Sources */,
 				FCCA2A41230EB8FD007E6C8E /* MainViewController.swift in Sources */,
 				FCCA2A47230EB9D2007E6C8E /* CompletedViewController.swift in Sources */,
+				B6DAD03123131EA600668E60 /* LogInViewController.swift in Sources */,
 				B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */,
+				B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */,
+				B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */,
 				FCCA2A45230EB97C007E6C8E /* LocationViewController.swift in Sources */,
+				B6DAD0432313C2CB00668E60 /* OngoingOrderViewController.swift in Sources */,
 				B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +319,14 @@
 				043BE134230EB2C5004D12B1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B6DAD0342313215800668E60 /* Accounts.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B6DAD0352313215800668E60 /* Base */,
+			);
+			name = Accounts.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -358,6 +452,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Minimum/Minimum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YU888KGFV4;
 				INFOPLIST_FILE = Minimum/Info.plist;
@@ -366,7 +461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nandamochammad.Minimum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mc3.Minimum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -377,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Minimum/Minimum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YU888KGFV4;
 				INFOPLIST_FILE = Minimum/Info.plist;
@@ -385,7 +481,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nandamochammad.Minimum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mc3.Minimum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

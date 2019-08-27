@@ -1,8 +1,8 @@
 //
-//  MapViewController.swift
+//  OngoingOrderViewController.swift
 //  Minimum
 //
-//  Created by Jessica Jacob on 22/08/19.
+//  Created by Edward Chandra on 26/08/19.
 //  Copyright © 2019 nandamochammad. All rights reserved.
 //
 
@@ -10,13 +10,16 @@ import UIKit
 import MapKit
 import CoreLocation
 
-//implementing UIViewController for the UI, MKMapViewDelegate for the MapView, and LocationManager to manage the current location
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    
-    //MARK: IBOutlets
-    //outlets to be used
+class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+
     @IBOutlet weak var userMapView: MKMapView!
-    @IBOutlet weak var navigateButton: UIButton!
+    @IBOutlet weak var cardView: UIView!
+    
+    @IBOutlet weak var wasteCollectorImageView: UIImageView!
+    @IBOutlet weak var wasteCollectorName: UILabel!
+    @IBOutlet weak var wasteCollectorNumber: UILabel!
+    @IBOutlet weak var estimatedTime: UILabel!
+    @IBOutlet weak var finishButton: UIButton!
     
     //MARK: Variables
     //variables to be used
@@ -28,39 +31,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private var coordinateLongitude: [Double] = []
     private var steps: Int = 0
     
-    var latCurrent : Double = 0.0
-    var longCurrent : Double = 0.0
+    var navigation: [CLLocationCoordinate2D] = []
     
     var pointAnnotation : CustomAnnotation!
     var pinAnnotationView : MKAnnotationView?
     
-    var pointPickUp: MKPointAnnotation!
-    var pinPickUp: MKAnnotationView?
-    
-    var userLocationIs: CLLocationCoordinate2D!
-    
     var currentStep = 0
-    
-    var navigation: [CLLocationCoordinate2D] = []
     
     var latPinPoint: Double = 0.0
     var longPinPoint: Double = 0.0
     
-    //MARK: View Did Load
-    //when the ui elements is being loaded
+    var latCurrent : Double = 0.0
+    var longCurrent : Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //calling the setupMap function to setting up the map
+        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Pesanan Anda Saat Ini"
+        self.navigationItem.setHidesBackButton(true, animated:true)
+        
+        customizeElement()
+        
         setupMap()
         
-        //calling the getRouteDirection function to start showing the route direction to the destination
-        //getRouteDirection()
-        addPinPoint()
-        
+        navigate()
     }
-    
-    
     
     //MARK: Map Setup
     //setting up the map
@@ -70,7 +66,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         userMapView.delegate = self
         
         //map view showing user location
-        userMapView.showsUserLocation = true
+        userMapView.showsUserLocation = false
         
         //user location default value used
         userLocation = CLLocation(latitude: -6.301492, longitude: 106.652992)
@@ -94,6 +90,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func navigate(){
+        let sourceLocation = CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417)
+        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
+        
+//        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
+        
+        let pointDestination = MKPointAnnotation()
+        pointDestination.coordinate = CLLocationCoordinate2D(
+            latitude: destinationLocation.latitude,
+            longitude: destinationLocation.longitude)
+        
+        let pinViewDestination = MKAnnotationView(annotation: pointDestination, reuseIdentifier: "destinationPin")
+        
+        userMapView.addAnnotation(pinViewDestination.annotation!)
+        
+        let centerLocation = CLLocationCoordinate2D(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
+        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 250.0, longitudinalMeters: 250.0)
+        
+        //bring camera to this position
+        self.userMapView.setRegion(regions, animated: true)
+        
+        createRoute(withSource: sourceLocation,
+                    andDestination: CLLocationCoordinate2D(
+                        latitude: destinationLocation.latitude,
+                        longitude: destinationLocation.longitude))
+        
+        
+        
+    }
+    
     //MARK: Location Manager when Updated
     //function run when location is updated
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -103,52 +129,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.userLocation = location
         }
     }
-    
-    //MARK: Get Route Direction
-//    //getting route direction to show in the map
-//    func getRouteDirection() {
-//
-//        //request the direction
-//        let request = MKDirections.Request()
-//
-//        //getting the starting point of the direction
-//        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: -6.301492, longitude: 106.652992), addressDictionary: nil))
-//
-//        //setting the destination that the direction headed to
-//        userDestination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: -6.298421, longitude: 106.669778), addressDictionary: nil))
-//
-//        //optional binding to prevent fatal error when return nil
-//        if let destination = userDestination {
-//
-//            //getting the destination point of the direction
-//            request.destination = destination
-//        }
-//
-//        //disable the alternate route that direction can show
-//        request.requestsAlternateRoutes = false
-//
-//        //setting the direction with request declared above
-//        let directions = MKDirections(request: request)
-//
-//        //calculate the route for the direction
-//        directions.calculate { (response, error) in
-//
-//            //check if there's an error
-//            if let error = error {
-//
-//                //print the cause description of the error
-//                print(error.localizedDescription)
-//            } else {
-//
-//                //optional binding to prevent fatal error when return nil
-//                if let response = response {
-//
-//                    //calling the show route function to start showing the route
-//                    self.showRoute(response)
-//                }
-//            }
-//        }
-//    }
     
     func center(onRoute route: [CLLocationCoordinate2D], fromDistance km: Double) {
         let center = MKPolyline(coordinates: route, count: route.count).coordinate
@@ -163,7 +143,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             //adding overlay to show the route above the road
             userMapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
-           
+            
             //Changes the currently visible portion of the map and optionally animates the change.
             userMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             
@@ -208,76 +188,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         move(arrayOfSteps: navigation)
         
         return renderer
-    }
-    
-    //=======================================================
-    
-    //MARK: Button Action
-    //action when button clicked
-    @IBAction func currentLocationAction(_ sender: Any) {
-        
-        //getting the coordinate of user location
-        if let coordinate = userLocation?.coordinate {
-            
-            //When user click the button, the current location shown with latitudinal and longitudinal meters of 1000
-            let coordinateRegion = MKCoordinateRegion(center: coordinate,
-                                                      latitudinalMeters: CLLocationDistance(1000), longitudinalMeters: CLLocationDistance(1000))
-            
-            //setting the region view of 1000 radius
-            userMapView.setRegion(coordinateRegion, animated: true)
-            
-        }
-        
-    }
-    
-    @IBAction func navigateAction(_ sender: Any) {
-        
-        let sourceLocation = CLLocationCoordinate2D(latitude: userLocation?.coordinate.latitude ?? -6.301492, longitude: userLocation?.coordinate.longitude ?? 106.652992)
-        //let destinationLocation = CLLocationCoordinate2D(latitude: -6.298421, longitude: 106.669778)
-        
-        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
-        
-            let pointDestination = MKPointAnnotation()
-            pointDestination.coordinate = CLLocationCoordinate2D(
-                latitude: destinationLocation.latitude,
-                longitude: destinationLocation.longitude)
-            
-            let pinViewDestination = MKAnnotationView(annotation: pointDestination, reuseIdentifier: "destinationPin")
-            
-            userMapView.addAnnotation(pinViewDestination.annotation!)
-            
-            let centerLocation = CLLocationCoordinate2D(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
-            let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 250.0, longitudinalMeters: 250.0)
-            
-            //bring camera to this position
-            self.userMapView.setRegion(regions, animated: true)
-        
-            createRoute(withSource: sourceLocation,
-                        andDestination: CLLocationCoordinate2D(
-                            latitude: destinationLocation.latitude,
-                            longitude: destinationLocation.longitude))
-            
-        
-        
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        guard let annotation = annotation as? MKAnnotation else { return nil }
-        let identifier = "marker"
-        var view: MKMarkerAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
-            dequeuedView.annotation = annotation
-            view = dequeuedView
-        } else {
-            // 5
-            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.canShowCallout = true
-            view.calloutOffset = CGPoint(x: -5, y: 5)
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        }
-        
-        return view
     }
     
     //MARK: - Create Route
@@ -351,6 +261,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.move(arrayOfSteps: arrayOfSteps)
                 }else{
                     print("Hei, Your Picker already Arrive!")
+                    
+                    self.finishButton.isEnabled = true
+                    self.finishButton.layer.opacity = 1
                 }
             })
         }else{
@@ -358,35 +271,33 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func addPinPoint(){
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.addPinPointGesture))
-        userMapView.addGestureRecognizer(gesture)
-    }
-    
-    @objc func addPinPointGesture(gestureReconizer: UILongPressGestureRecognizer){
-        let location = gestureReconizer.location(in: userMapView)
-        let coordinate = userMapView.convert(location, toCoordinateFrom: userMapView)
+    @IBAction func finishAction(_ sender: Any) {
         
-        let annotation = MKPointAnnotation()
+        let alert = UIAlertController(title: "Konfirmasi", message: "Apakah anda ingin menyelesaikan pesanan anda?", preferredStyle: .alert)
         
-        annotation.coordinate = coordinate
-        annotation.title = "Pick Up Location"
-        
-        for annotationPoint in userMapView.annotations{
-            if annotationPoint.title == "Pick Up Location" {
-                self.userMapView.removeAnnotation(annotationPoint)
-                self.userMapView.removeAnnotations(userMapView.annotations)
-                self.navigation.removeAll()
-                self.userMapView.removeOverlays(userMapView.overlays)
-            }
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+            self.performSegue(withIdentifier: "unwindToMainSegue", sender: self)
         }
         
-        self.userMapView.addAnnotation(annotation)
+        let cancelAction = UIAlertAction(title: "Batal", style: .cancel, handler: nil)
         
-        latPinPoint = coordinate.latitude
-        longPinPoint = coordinate.longitude
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     
-    
+    func customizeElement(){
+        finishButton.layer.cornerRadius = 11
+        cardView.layer.cornerRadius = 11
+        cardView.layer.shadowColor = UIColor.lightGray.cgColor
+        cardView.layer.shadowOpacity = 1
+        cardView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        cardView.layer.shadowRadius = 10
+        
+        finishButton.isEnabled = false
+        finishButton.layer.opacity = 0.5
+    }
+
 }
