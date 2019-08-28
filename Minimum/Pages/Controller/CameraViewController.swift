@@ -18,6 +18,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
 
         self.navigationItem.title = "Petunjuk Pemilihan Foto"
+        self.navigationController?.navigationItem.title = ""
         
         customizeElement()
         

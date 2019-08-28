@@ -25,7 +25,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     //variables to be used
     private var userDestination: MKMapItem?
     private var locationManager: CLLocationManager = CLLocationManager()
-    private var userLocation: CLLocation?
+    private var userLocation: CLLocation = CLLocation()
     
     var navigation: [CLLocationCoordinate2D] = []
     
@@ -35,28 +35,15 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        self.navigationItem.title = "Pilih Lokasi"
         
         manager.delegate = self
         userMapView.delegate = self
         
-//        self.cancelButton.isEnabled = false
-//        self.cancelButton.layer.opacity = 0.5
-        
-        customizeElement()
+//        manager.is
         
         setupMap()
         
         addPinPoint()
-        
-        let annotation = MKPointAnnotation()
-        
-        annotation.coordinate = userMapView.userLocation.coordinate
-        annotation.title = "Pick Up Location"
-//        print("Pin Location, ", userMapView.userLocation.coordinate, ", ", userMapView.userLocation.coordinate)
-        
-        self.userMapView.addAnnotation(annotation)
         
     }
     
@@ -69,9 +56,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         //map view showing user location
         userMapView.showsUserLocation = true
-        
-        //user location default value used
-//        userLocation = CLLocation(latitude: -6.310177, longitude: 106.652992)
         
         //accuracy of the location set to best,
         //developer can set it to 3 metres, 10 metres, etc of accuracy.
@@ -90,95 +74,31 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             //request permission to the user when is going to use it in the foreground
             locationManager.requestWhenInUseAuthorization()
         }
-    }
-    
-    //MARK: Location Manager when Updated
-    //function run when location is updated
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        //getting location of current position and passing the data to userLocation variable
-        if let location = locations.last{
-            self.userLocation = location
-        }
+        print("UserLocLat, ", userMapView.userLocation.coordinate.latitude)
+        print("UserLocLong, ", userMapView.userLocation.coordinate.longitude)
         
-        self.manager.stopUpdatingLocation()
-        
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        
-        let centerLocation = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
-        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 250.0, longitudinalMeters: 250.0)
-        
-        //bring camera to this position
-        self.userMapView.setRegion(regions, animated: true)
-    }
-    
-    func center(onRoute route: [CLLocationCoordinate2D], fromDistance km: Double) {
-        let center = MKPolyline(coordinates: route, count: route.count).coordinate
-        userMapView.setCamera(MKMapCamera(lookingAtCenter: center, fromDistance: km * 1000, pitch: 0, heading: 0), animated: false)
-    }
-    
-    //MARK: Function run if there's an error in the Location Manager
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        //print the error description
-        print(error.localizedDescription)
     }
     
     @IBAction func getThisLocation(_ sender: Any) {
-        //getting the coordinate of user location
-//        if getCurrentLocationOutlet.titleLabel?.text == "Gunakan Lokasi"{
+       
+        let alert = UIAlertController(title: "Konfirmasi", message: "Apakah titik jemput sudah sesuai?", preferredStyle: .alert)
+            
         
-//                    if let coordinate = userLocation?.coordinate {
-//
-//                        //When user click the button, the current location shown with latitudinal and longitudinal meters of 1000
-//                        let coordinateRegion = MKCoordinateRegion(center: coordinate,
-//                                                                  latitudinalMeters: CLLocationDistance(1000), longitudinalMeters: CLLocationDistance(1000))
-//
-//                        //setting the region view of 1000 radius
-//                        userMapView.setRegion(coordinateRegion, animated: true)
-//
-//                        latPinPoint = userLocation?.coordinate.latitude ?? 0.0
-//                        longPinPoint = userLocation?.coordinate.longitude ?? 0.0
+        let cancelAction = UIAlertAction(title: "Belum", style: .cancel){ (_) in
+            self.getCurrentLocationOutlet.setTitle("Gunakan Lokasi Saat Ini", for: .normal)
+        }
         
-//                        fetchCityAndCountry(from: userLocation!) { subStreet, street, city, country, error in
-//                            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
-//                            print(subStreet + ", " + street + ", " + city + ", " + country)
-//
-//                            self.locationPickedLabel.text = subStreet + ", " + street + ", " + city + ", " + country
-//
-//                        }
-            
-//                        DispatchQueue.main.async {
-//                            self.getCurrentLocationOutlet.setTitle("Konfirmasi", for: .normal)
-            
-//                            self.cancelButton.isEnabled = true
-//                            self.cancelButton.layer.opacity = 1
-//                        }
-                        
-//                    }
-            
-//        }else{
-            let alert = UIAlertController(title: "Konfirmasi", message: "Apakah point yang anda taruh sudah pas?", preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "Ya", style: .default) { (_) in
-                    print("success")
-                    print(self.latPinPoint)
-                    print(self.longPinPoint)
+        let okAction = UIAlertAction(title: "Sudah", style: .default) { (_) in
+            print("success")
                 
-                    self.performSegue(withIdentifier: "unwindToOrder", sender: self)
-                }
+            self.performSegue(withIdentifier: "unwindToOrder", sender: self)
+        }
             
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
             
-            let cancelAction = UIAlertAction(title: "Batal", style: .cancel){ (_) in
-                self.getCurrentLocationOutlet.setTitle("Gunakan Lokasi Saat Ini", for: .normal)
-            }
-            
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-            
-            self.present(alert, animated: true, completion: nil)
-//        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func addPinPoint(){
@@ -207,21 +127,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         latPinPoint = coordinate.latitude
         longPinPoint = coordinate.longitude
         
-//        self.cancelButton.isEnabled = true
-//        self.cancelButton.layer.opacity = 1
-        
-//        fetchCityAndCountry(from: pinLocation) { subStreet, street, city, country, error in
-//            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else {
-//                print("error, ", error)
-//                return }
-//            print("Location Pin : ", subStreet + ", " + street + ", " + city + ", " + country)
-//
-//            self.locationPickedLabel.text = subStreet + ", " + street + ", " + city + ", " + country
-        
         self.locationPickedLabel.text = "Pick Up Location in \n\(latPinPoint), \(longPinPoint)"
-
-//
-//        }
         
     }
     
@@ -242,19 +148,16 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             
             manager.startUpdatingLocation()
             
-            //            setUpPickUpPointer()
-            
+//            let annotation = MKPointAnnotation()
+//            annotation.coordinate = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+//            annotation.title = "Pick Up Location"
+//            self.userMapView.addAnnotation(annotation)
+//
+//            self.locationPickedLabel.text = "Pick Up Location in \n\(latPinPoint), \(longPinPoint)"
         } else {
             print("PLease turn on location services or GPS")
         }
     }
-    
-    
-//    @IBAction func remove(_ sender: Any) {
-//        removeMarker()
-//        self.getCurrentLocationOutlet.setTitle("Gunakan Lokasi Saat Ini", for: .normal)
-//    }
-
     
     func centerMapOnLocation(_ location: CLLocation, mapView: MKMapView) {
         let regionRadius: CLLocationDistance = 1000
@@ -271,16 +174,51 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                        error)
         }
     }
-
-    func customizeElement(){
-        getCurrentLocationOutlet.layer.cornerRadius = 11
-        informationView.layer.cornerRadius = 11
-        informationView.layer.shadowColor = UIColor.lightGray.cgColor
-        informationView.layer.shadowOpacity = 1
-        informationView.layer.shadowOffset = CGSize(width: 0, height: -2)
-        informationView.layer.shadowRadius = 10
+    
+    //MARK: Location Manager when Updated
+    //function run when location is updated
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-//        cancelButton.layer.cornerRadius = 11
-
+        userMapView.removeAnnotations(userMapView.annotations)
+        manager.distanceFilter = 100
+        
+        //getting location of current position and passing the data to userLocation variable
+        if let location = locations.last{
+            self.userLocation = location
+        }
+        
+        //Add Pin when first Launch
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        annotation.title = "Pick Up Location"
+        self.userMapView.addAnnotation(annotation)
+        
+        //Get Name for Places
+        let point = MKPlacemark(coordinate: annotation.coordinate)
+        self.locationPickedLabel.text = point.name
+        
+        //Set Value of Coordinate
+        latPinPoint = annotation.coordinate.latitude
+        longPinPoint = annotation.coordinate.longitude
+        
+        //Stop Update Location
+        self.manager.stopUpdatingLocation()
+        
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        let centerLocation = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
+        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 250.0, longitudinalMeters: 250.0)
+        
+        //bring camera to this position
+        self.userMapView.setRegion(regions, animated: true)
+    }
+    
+    
+    //MARK: Function run if there's an error in the Location Manager
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        //print the error description
+        print(error.localizedDescription)
     }
 }

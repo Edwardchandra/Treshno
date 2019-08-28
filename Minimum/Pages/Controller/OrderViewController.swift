@@ -34,6 +34,7 @@ class OrderViewController: UIViewController {
         customizeElement()
         
         wasteImageViewGesture()
+        
     }
     
     @IBAction func orderNowAction(_ sender: Any) {

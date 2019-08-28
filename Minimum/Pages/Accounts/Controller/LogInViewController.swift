@@ -56,24 +56,31 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
             retrieveDataFromCloudKit()
             print(accounts.count)
             
+            var foundUser = false
             for i in 0..<accounts.count{
                 let email = accounts[i].value(forKey: "email") as! String
                 let password = accounts[i].value(forKey: "password") as! String
                 
+                print(email)
+                print(password)
+                
                 if emailTextField.text! == email && passwordTextField.text! == password {
-                    print("Sign In success")
                     
-                    performSegue(withIdentifier: "mainSegue", sender: self)
+                    foundUser = true
                     
                     break
                 }
-                else {
-                    let alert = UIAlertController(title: "Login Gagal", message: "Coba login kembali", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    
-                    self.present(alert, animated: true)
-                    print("Sign In failed")
-                }
+            }
+            
+            if foundUser == true{
+                print("Sign In success")
+                
+                performSegue(withIdentifier: "mainSegue", sender: self)
+            }else{
+                let alert = UIAlertController(title: "Maaf", message: "Silakan coba login kembali", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                
+                self.present(alert, animated: true)
             }
         }
     }
@@ -87,7 +94,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                 return}
             
             self.accounts = records
-//            print("RetrieveDataFromCloudKit: Account ", self.accounts)
+            
         }
         
     }

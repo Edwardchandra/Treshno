@@ -63,10 +63,10 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         self.navigationItem.title = "Pesanan Anda Saat Ini"
         self.navigationItem.setHidesBackButton(true, animated:true)
         
-        fotoSampah.image = image
+//        fotoSampah.image = image
         wasteCollectorImageView.image = UIImage(named: "wasteCollector")
         
-        customizeElement()
+//        customizeElement()
         
         setupMap()
         
@@ -110,24 +110,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
         print("Destination: \n latitude ", latPinPoint, "\n longitude ", longPinPoint)
         
-//        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
-        
-//        fetchCityAndCountry(from: CLLocation(latitude: sourceLocation!.latitude, longitude: sourceLocation!.longitude)) { subStreet, street, city, country, error in
-//            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
-//            print(subStreet + ", " + street + ", " + city + ", " + country)
-//
-//            self.sourceLocationData = subStreet + ", " + street + ", " + city + ", " + country
-//
-//        }
-        
-//        fetchCityAndCountry(from: CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)) { subStreet, street, city, country, error in
-//            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
-//            print(subStreet + ", " + street + ", " + city + ", " + country)
-//
-//            self.destinationLocationData = subStreet + ", " + street + ", " + city + ", " + country
-//
-//        }
-        
         //MARK: - Pin Destination
         let pointDestination = MKPointAnnotation()
         pointDestination.coordinate = CLLocationCoordinate2D(
@@ -153,42 +135,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         
     }
-    
-//    //MARK: Function to Show Direction Route
-//    func showRoute(_ response: MKDirections.Response) {
-//
-//        //looping the route that is generated in the response as many as the routes generated
-//        for route in response.routes {
-//
-//            //adding overlay to show the route above the road
-//            userMapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
-//
-//            //Changes the currently visible portion of the map and optionally animates the change.
-//            userMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-//
-//            //looping through the steps in the route that is needed to arrive to the destination
-//            for step in route.steps {
-//
-//                //print the steps in the console
-//                print(step.instructions)
-//
-//                coordinateLatitude.append(step.polyline.coordinate.latitude)
-//                coordinateLongitude.append(step.polyline.coordinate.longitude)
-//
-//                navigation.append(CLLocationCoordinate2D(latitude: step.polyline.coordinate.latitude, longitude: step.polyline.coordinate.longitude))
-//
-//                steps = step.polyline.pointCount
-//            }
-//
-//        }
-//    }
-    
-//    //MARK: Function run if there's an error in the Location Manager
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//
-//        //print the error description
-//        print(error.localizedDescription)
-//    }
     
     //MARK: Function to Overlay the Road
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -344,7 +290,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         cardView.layer.shadowOpacity = 0.5
         cardView.layer.shadowOffset = CGSize(width: 0, height: -2)
         cardView.layer.shadowRadius = 10
-        
+
         finishButton.isEnabled = false
         finishButton.layer.opacity = 0.5
     }
