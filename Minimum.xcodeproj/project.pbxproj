@@ -16,6 +16,7 @@
 		B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69E19A52314E9FB00E33D06 /* Onboard.xib */; };
 		B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E19A92314EB3E00E33D06 /* Onboard.swift */; };
 		B69E19AF23151F0B00E33D06 /* OrderReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */; };
+		B69E19B22315B8AB00E33D06 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E19B12315B8AB00E33D06 /* CameraViewController.swift */; };
 		B6DAD03123131EA600668E60 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD02F23131EA600668E60 /* LogInViewController.swift */; };
 		B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAD03023131EA600668E60 /* SignUpViewController.swift */; };
 		B6DAD0362313215800668E60 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DAD0342313215800668E60 /* Accounts.storyboard */; };
@@ -41,6 +42,7 @@
 		B69E19A52314E9FB00E33D06 /* Onboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Onboard.xib; sourceTree = "<group>"; };
 		B69E19A92314EB3E00E33D06 /* Onboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
 		B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReviewViewController.swift; sourceTree = "<group>"; };
+		B69E19B12315B8AB00E33D06 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		B6DAD02F23131EA600668E60 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B6DAD03023131EA600668E60 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B6DAD0352313215800668E60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Minimum/Pages/Base.lproj/Accounts.storyboard; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				B6DAD0422313C2CB00668E60 /* OngoingOrderViewController.swift */,
 				B6DAD04423145F2100668E60 /* OrderViewController.swift */,
 				B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */,
+				B69E19B12315B8AB00E33D06 /* CameraViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */,
 				B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */,
 				B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */,
+				B69E19B22315B8AB00E33D06 /* CameraViewController.swift in Sources */,
 				FCCA2A45230EB97C007E6C8E /* LocationViewController.swift in Sources */,
 				B6DAD0432313C2CB00668E60 /* OngoingOrderViewController.swift in Sources */,
 				B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */,

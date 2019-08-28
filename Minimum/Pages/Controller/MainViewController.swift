@@ -40,13 +40,16 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     func createSlides() -> [Onboard]{
         
         let slide1: Onboard = Bundle.main.loadNibNamed( "Onboard", owner: self, options: nil)?.first as! Onboard
-        slide1.onboardLabel.text = "Slide 1"
+        slide1.onboardLabel.text = "Pilah dan kumpulkan sampah anorganikmu \n dalam satu tempat."
+        slide1.onboardImageView.image = UIImage(named: "Slide1")
         
         let slide2: Onboard = Bundle.main.loadNibNamed( "Onboard", owner: self, options: nil)?.first as! Onboard
-        slide2.onboardLabel.text = "Slide 2"
+        slide2.onboardLabel.text = "Kami siap membantumu dalam mengambil sampahmu."
+        slide2.onboardImageView.image = UIImage(named: "Slide2")
         
         let slide3: Onboard = Bundle.main.loadNibNamed( "Onboard", owner: self, options: nil)?.first as! Onboard
-        slide3.onboardLabel.text = "Slide 3"
+        slide3.onboardLabel.text = "Bersama kami, sampah anorganikmu \n siap diolah menjadi lebih bermanfaat."
+        slide3.onboardImageView.image = UIImage(named: "Slide3")
         
         slide1.customizeElement()
         slide2.customizeElement()

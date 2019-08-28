@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Treshno needs to access camera to take waste photo.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,6 +22,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Treshno needs to access camera to take waste photo.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Treshno needs to access location to get your current location.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -33,7 +33,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>CameraSB</string>
 	<key>UIMainStoryboardFile</key>
-	<string>CameraSB</string>
+	<string>Accounts</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OrderViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class OrderViewController: UIViewController {
     
     @IBOutlet weak var locationPickerButton: UIButton!
     
@@ -23,11 +23,13 @@ class OrderViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     var address: String = ""
     
+    var image: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "Order"
+        self.navigationItem.title = "Pesanan Baru"
         
         customizeElement()
         
@@ -62,6 +64,10 @@ class OrderViewController: UIViewController, UIImagePickerControllerDelegate, UI
             print(address)
             
             addressLabel.text = address
+        }else if let sourceViewController = sender.source as? CameraViewController{
+            image = sourceViewController.image
+            
+            wasteImageView.image = image
         }
     }
     
@@ -71,48 +77,7 @@ class OrderViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     @objc func wasteImageViewAction(){
-        showActionSheet()
-    }
-    
-    func camera(){
-        let myPickerController = UIImagePickerController()
-        myPickerController.delegate = self
-        myPickerController.sourceType = UIImagePickerController.SourceType.camera
-        
-        self.present(myPickerController, animated: true, completion: nil)
-        
-    }
-    
-    func photoLibrary(){
-        
-        let myPickerController = UIImagePickerController()
-        myPickerController.delegate = self
-        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
-        
-        self.present(myPickerController, animated: true, completion: nil)
-        
-    }
-    
-    func showActionSheet() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.camera()
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { (alert:UIAlertAction!) -> Void in
-            self.photoLibrary()
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        wasteImageView.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "cameraSegue", sender: self)
     }
     
     func customizeElement(){

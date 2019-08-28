@@ -49,12 +49,15 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     var image: UIImage = UIImage(named: "Launch")!
     
+    var eta: TimeInterval?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationItem.title = "Pesanan Anda Saat Ini"
         self.navigationItem.setHidesBackButton(true, animated:true)
+        
         
         customizeElement()
         
@@ -238,6 +241,15 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 return
             }
             
+            for route in response.routes{
+                self.eta = route.expectedTravelTime
+                
+                DispatchQueue.main.async {
+                    self.estimatedTime.text = self.stringFromTimeInterval(interval: self.eta!) as String
+                }
+                
+            }
+            
             self.navigation.removeAll()
             let route = response.routes[0]//tujuan
             let totalStep = response.routes[0].steps
@@ -254,6 +266,19 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
             let rect = route.polyline.boundingMapRect
             self.userMapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
+    }
+    
+    func stringFromTimeInterval(interval: TimeInterval) -> NSString {
+        
+        let ti = NSInteger(interval)
+        
+//        let ms = Int((interval.truncatingRemainder(dividingBy: 1)) * 1000)
+//
+//        let seconds = ti % 60
+        let minutes = (ti / 60) % 60
+        let hours = (ti / 3600)
+        
+        return NSString(format: "Akan tiba dalam %d jam %d menit",hours,minutes)
     }
     
     //MARK:- Function Animate
@@ -343,5 +368,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         }
         
     }
+    
     
 }
