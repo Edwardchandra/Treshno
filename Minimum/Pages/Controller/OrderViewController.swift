@@ -59,11 +59,12 @@ class OrderViewController: UIViewController {
             longitudeData = sourceViewController.longPinPoint
             address = sourceViewController.locationPickedLabel.text ?? ""
             
-            print(latitudeData)
-            print(longitudeData)
-            print(address)
+            print("New Lat, ", latitudeData)
+            print("New Long, ", longitudeData)
+            print("New Address, ", address)
             
-            addressLabel.text = address
+            addressLabel.text = "\(latitudeData), \(longitudeData)"
+            locationPickerButton.titleLabel?.text = "Ganti Lokasi"
         }else if let sourceViewController = sender.source as? CameraViewController{
             image = sourceViewController.image
             
@@ -89,9 +90,13 @@ class OrderViewController: UIViewController {
         
         if segue.identifier == "orderInProgressSegue"{
             let destination = segue.destination as! OngoingOrderViewController
+            
             destination.latPinPoint = latitudeData
             destination.longPinPoint = longitudeData
             destination.image = wasteImageView.image!
+            
+            print("Latitude, ", latitudeData, "Longitude, ", longitudeData)
+            print("PrepareForSegue: image, ", image)
         }
         
     }

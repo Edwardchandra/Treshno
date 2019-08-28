@@ -19,8 +19,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
         
+        pageControl.isEnabled = false
         
-        customizeElement()
         
         setupScrollView()
     }
@@ -42,19 +42,22 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         let slide1: Onboard = Bundle.main.loadNibNamed( "Onboard", owner: self, options: nil)?.first as! Onboard
         slide1.onboardLabel.text = "Pilah dan kumpulkan sampah anorganikmu \n dalam satu tempat."
         slide1.onboardImageView.image = UIImage(named: "Slide1")
+
+        slide1.customizeElement()
         
         let slide2: Onboard = Bundle.main.loadNibNamed( "Onboard", owner: self, options: nil)?.first as! Onboard
         slide2.onboardLabel.text = "Kami siap membantumu dalam mengambil sampahmu."
         slide2.onboardImageView.image = UIImage(named: "Slide2")
         
+        slide2.customizeElement()
+        
         let slide3: Onboard = Bundle.main.loadNibNamed( "Onboard", owner: self, options: nil)?.first as! Onboard
         slide3.onboardLabel.text = "Bersama kami, sampah anorganikmu \n siap diolah menjadi lebih bermanfaat."
         slide3.onboardImageView.image = UIImage(named: "Slide3")
-        
-        slide1.customizeElement()
-        slide2.customizeElement()
+
         slide3.customizeElement()
         
+
         return [slide1, slide2, slide3]
     }
     
@@ -79,6 +82,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         super.viewWillAppear(animated)
         
         // Hide the Navigation Bar
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "BG")!)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -89,8 +93,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    func customizeElement(){
-        mulaiButton.layer.cornerRadius = 11
+    func customizeElement(_ obj: UIView){
+        obj.layer.cornerRadius = 25
     }
     
     @IBAction func unwindToMain(segue: UIStoryboardSegue){

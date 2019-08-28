@@ -20,6 +20,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     @IBOutlet weak var wasteCollectorNumber: UILabel!
     @IBOutlet weak var estimatedTime: UILabel!
     @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var fotoSampah: UIImageView!
     
     //MARK: Variables
     //variables to be used
@@ -38,6 +39,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     var currentStep = 0
     
+    //Set Destination
     var latPinPoint: Double = 0.0
     var longPinPoint: Double = 0.0
     
@@ -49,6 +51,9 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     var image: UIImage = UIImage(named: "Launch")!
     
+    var sourceLocation: CLLocationCoordinate2D?
+    var destinationLocation: CLLocationCoordinate2D?
+    
     var eta: TimeInterval?
     
     override func viewDidLoad() {
@@ -58,6 +63,8 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         self.navigationItem.title = "Pesanan Anda Saat Ini"
         self.navigationItem.setHidesBackButton(true, animated:true)
         
+        fotoSampah.image = image
+        wasteCollectorImageView.image = UIImage(named: "wasteCollector")
         
         customizeElement()
         
@@ -74,10 +81,10 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         userMapView.delegate = self
         
         //map view showing user location
-        userMapView.showsUserLocation = false
+        userMapView.showsUserLocation = true
         
         //user location default value used
-        userLocation = CLLocation(latitude: -6.301492, longitude: 106.652992)
+//        userLocation = CLLocation(latitude: -6.301492, longitude: 106.652992)
         
         //accuracy of the location set to best,
         //developer can set it to 3 metres, 10 metres, etc of accuracy.
@@ -87,113 +94,101 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         locationManager.delegate = self
         
         //check the authorization status by the user
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            
-            //start updating the location of the current position
-            locationManager.startUpdatingLocation()
-        } else {
-            
-            //request permission to the user when is going to use it in the foreground
-            locationManager.requestWhenInUseAuthorization()
-        }
+//        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+//
+//            //start updating the location of the current position
+//            locationManager.startUpdatingLocation()
+//        } else {
+//
+//            //request permission to the user when is going to use it in the foreground
+//            locationManager.requestWhenInUseAuthorization()
+//        }
     }
     
     func navigate(){
-        let sourceLocation = CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417)
-        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
+        sourceLocation = CLLocationCoordinate2D(latitude: -6.309411, longitude: 106.647424) // Depan Unilever
+        destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
+        print("Destination: \n latitude ", latPinPoint, "\n longitude ", longPinPoint)
         
 //        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
         
-        fetchCityAndCountry(from: CLLocation(latitude: sourceLocation.latitude, longitude: sourceLocation.longitude)) { subStreet, street, city, country, error in
-            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
-            print(subStreet + ", " + street + ", " + city + ", " + country)
-            
-            self.sourceLocationData = subStreet + ", " + street + ", " + city + ", " + country
-            
-        }
+//        fetchCityAndCountry(from: CLLocation(latitude: sourceLocation!.latitude, longitude: sourceLocation!.longitude)) { subStreet, street, city, country, error in
+//            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
+//            print(subStreet + ", " + street + ", " + city + ", " + country)
+//
+//            self.sourceLocationData = subStreet + ", " + street + ", " + city + ", " + country
+//
+//        }
         
-        fetchCityAndCountry(from: CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)) { subStreet, street, city, country, error in
-            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
-            print(subStreet + ", " + street + ", " + city + ", " + country)
-            
-            self.destinationLocationData = subStreet + ", " + street + ", " + city + ", " + country
-            
-        }
+//        fetchCityAndCountry(from: CLLocation(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)) { subStreet, street, city, country, error in
+//            guard let subStreet = subStreet, let street = street, let city = city, let country = country, error == nil else { return }
+//            print(subStreet + ", " + street + ", " + city + ", " + country)
+//
+//            self.destinationLocationData = subStreet + ", " + street + ", " + city + ", " + country
+//
+//        }
         
+        //MARK: - Pin Destination
         let pointDestination = MKPointAnnotation()
         pointDestination.coordinate = CLLocationCoordinate2D(
-            latitude: destinationLocation.latitude,
-            longitude: destinationLocation.longitude)
+            latitude: destinationLocation!.latitude,
+            longitude: destinationLocation!.longitude)
         
         let pinViewDestination = MKAnnotationView(annotation: pointDestination, reuseIdentifier: "destinationPin")
         
         userMapView.addAnnotation(pinViewDestination.annotation!)
         
-        let centerLocation = CLLocationCoordinate2D(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
-        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 250.0, longitudinalMeters: 250.0)
+        //MARK: - Set Camera Location
+        let centerLocation = CLLocationCoordinate2D(latitude: destinationLocation!.latitude, longitude: destinationLocation!.longitude)
+        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
         
-        //bring camera to this position
         self.userMapView.setRegion(regions, animated: true)
         
-        createRoute(withSource: sourceLocation,
+        //MARK: - Create Route
+        createRoute(withSource: sourceLocation!,
                     andDestination: CLLocationCoordinate2D(
-                        latitude: destinationLocation.latitude,
-                        longitude: destinationLocation.longitude))
+                        latitude: destinationLocation!.latitude,
+                        longitude: destinationLocation!.longitude))
         
         
         
     }
     
-    //MARK: Location Manager when Updated
-    //function run when location is updated
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        //getting location of current position and passing the data to userLocation variable
-        if let location = locations.last{
-            self.userLocation = location
-        }
-    }
+//    //MARK: Function to Show Direction Route
+//    func showRoute(_ response: MKDirections.Response) {
+//
+//        //looping the route that is generated in the response as many as the routes generated
+//        for route in response.routes {
+//
+//            //adding overlay to show the route above the road
+//            userMapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
+//
+//            //Changes the currently visible portion of the map and optionally animates the change.
+//            userMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+//
+//            //looping through the steps in the route that is needed to arrive to the destination
+//            for step in route.steps {
+//
+//                //print the steps in the console
+//                print(step.instructions)
+//
+//                coordinateLatitude.append(step.polyline.coordinate.latitude)
+//                coordinateLongitude.append(step.polyline.coordinate.longitude)
+//
+//                navigation.append(CLLocationCoordinate2D(latitude: step.polyline.coordinate.latitude, longitude: step.polyline.coordinate.longitude))
+//
+//                steps = step.polyline.pointCount
+//            }
+//
+//        }
+//    }
     
-    func center(onRoute route: [CLLocationCoordinate2D], fromDistance km: Double) {
-        let center = MKPolyline(coordinates: route, count: route.count).coordinate
-        userMapView.setCamera(MKMapCamera(lookingAtCenter: center, fromDistance: km * 1000, pitch: 0, heading: 0), animated: false)
-    }
-    
-    //MARK: Function to Show Direction Route
-    func showRoute(_ response: MKDirections.Response) {
-        
-        //looping the route that is generated in the response as many as the routes generated
-        for route in response.routes {
-            
-            //adding overlay to show the route above the road
-            userMapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
-            
-            //Changes the currently visible portion of the map and optionally animates the change.
-            userMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-            
-            //looping through the steps in the route that is needed to arrive to the destination
-            for step in route.steps {
-                
-                //print the steps in the console
-                print(step.instructions)
-                
-                coordinateLatitude.append(step.polyline.coordinate.latitude)
-                coordinateLongitude.append(step.polyline.coordinate.longitude)
-                
-                navigation.append(CLLocationCoordinate2D(latitude: step.polyline.coordinate.latitude, longitude: step.polyline.coordinate.longitude))
-                
-                steps = step.polyline.pointCount
-            }
-            
-        }
-    }
-    
-    //MARK: Function run if there's an error in the Location Manager
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        //print the error description
-        print(error.localizedDescription)
-    }
+//    //MARK: Function run if there's an error in the Location Manager
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//
+//        //print the error description
+//        print(error.localizedDescription)
+//    }
     
     //MARK: Function to Overlay the Road
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -203,12 +198,12 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         renderer.lineWidth = 4.0
         
         pointAnnotation = CustomAnnotation()
-        pointAnnotation.pinCustomImageName = "point"
+        pointAnnotation.pinCustomImageName = "truck"
         pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: latCurrent, longitude: longCurrent)
         pinAnnotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
-        
+
         userMapView.addAnnotation(pinAnnotationView!.annotation!)
-        
+
         move(arrayOfSteps: navigation)
         
         return renderer
@@ -216,7 +211,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     //MARK: - Create Route
     func createRoute(withSource source: CLLocationCoordinate2D, andDestination destination: CLLocationCoordinate2D){
-        
         
         let sourceMapItem = MKMapItem(placemark: MKPlacemark(coordinate: source, addressDictionary: nil))
         let destinationMapItem = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
@@ -227,8 +221,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         directionRequest.transportType = .automobile
         
         let directions = MKDirections(request: directionRequest)
-        userMapView.removeOverlays(userMapView.overlays)
-        
+//        userMapView.removeOverlays(userMapView.overlays)
         
         directions.calculate {
             (response, error) -> Void in
@@ -348,7 +341,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         finishButton.layer.cornerRadius = 11
         cardView.layer.cornerRadius = 11
         cardView.layer.shadowColor = UIColor.lightGray.cgColor
-        cardView.layer.shadowOpacity = 1
+        cardView.layer.shadowOpacity = 0.5
         cardView.layer.shadowOffset = CGSize(width: 0, height: -2)
         cardView.layer.shadowRadius = 10
         

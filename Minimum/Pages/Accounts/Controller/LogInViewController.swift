@@ -68,6 +68,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                     break
                 }
                 else {
+                    let alert = UIAlertController(title: "Login Gagal", message: "Coba login kembali", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    
+                    self.present(alert, animated: true)
                     print("Sign In failed")
                 }
             }
@@ -78,9 +82,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
         let query = CKQuery(recordType: "Account", predicate: NSPredicate(value: true))
         database.perform(query, inZoneWith: nil) { (record, error) in
             
-            guard let records = record else {return}
+            guard let records = record else {
+                print("error", error)
+                return}
             
             self.accounts = records
+//            print("RetrieveDataFromCloudKit: Account ", self.accounts)
         }
         
     }
