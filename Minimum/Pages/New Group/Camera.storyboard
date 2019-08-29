@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="available_image" translatesAutoresizingMaskIntoConstraints="NO" id="KJg-P8-4i8">
-                                <rect key="frame" x="87" y="115" width="240" height="128.00000000000023"/>
+                                <rect key="frame" x="87" y="115" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="Z8M-50-9w8"/>
                                 </constraints>

@@ -26,13 +26,28 @@ class OrderReviewViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.title = "Pesanan Selesai"
-        self.navigationItem.setHidesBackButton(true, animated:true)
+//        self.navigationItem.setHidesBackButton(true, animated:true)
+//        self.navigationItem.title = ""
+        
+        let cancelButton = UIBarButtonItem.init(image: UIImage(named: "unavailable"), style: .plain, target: self, action: #selector(cancelAction))
+        
+        self.navigationController?.navigationItem.leftBarButtonItem = cancelButton
         
         wasteCollectorName.text = wasteCollector
         wasteImageView.image = wasteImage
         pickUpLocation.text = destination
         
         customizeButton()
+    }
+    
+    @objc func cancelAction(){
+        let alert = UIAlertController(title: "Perhatian", message: "Apakah anda ingin membatalkan pengambilan sampah?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Keluar", style: .cancel, handler: { (back) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Tidak", style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
     }
     
     @IBAction func finishAction(_ sender: Any) {

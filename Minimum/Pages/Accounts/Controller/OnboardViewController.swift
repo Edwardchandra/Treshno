@@ -26,8 +26,8 @@ class OnboardViewController: UIViewController {
     }
     
     func customizeElements (){
-        signInButton.layer.cornerRadius = 11
-        signUpButton.layer.cornerRadius = 11
+        signInButton.layer.cornerRadius = 10
+        signUpButton.layer.cornerRadius = 10
     }
 
 }

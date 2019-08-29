@@ -27,7 +27,6 @@ class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         _ = NotificationCenter.default
       
         
-        usernameTF.delegate = self
         fullNameTF.delegate = self
         emailTF.delegate = self
         passwordTF.delegate = self
@@ -39,7 +38,6 @@ class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     
     //viewTapped
     @objc func viewTapped (){
-        usernameTF.endEditing(true)
         fullNameTF.endEditing(true)
         emailTF.endEditing(true)
         passwordTF.endEditing(true)
@@ -55,32 +53,37 @@ class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     }
    
     
-    func saveToCloudKit(username : String, fullname : String, email : String, password : String){
+    func saveToCloudKit(fullname : String, email : String, password : String){
         let newID = CKRecord(recordType: "Account")
-        newID.setValue(username, forKey: "username")
         newID.setValue(fullname, forKey: "fullname")
         newID.setValue(email, forKey: "email")
         newID.setValue(password, forKey: "password")
         
         database.save(newID) { (record, error) in
-            guard record != nil else {return}
+            guard record != nil else {
+                print("error cuy", error)
+                return}
             print("success")
         }
     }
     
     @IBAction func signUpAction(_ sender: Any) {
-        if usernameTF.text == "" || fullNameTF.text == "" || emailTF.text == "" || passwordTF.text == ""  {
+        if fullNameTF.text == "" || emailTF.text == "" || passwordTF.text == ""  {
             let alertController = UIAlertController(title: "Perhatian", message:
-                "TextFieldnya tidak boleh kosong nih", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+                "Silakan isi semua field", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default))
             
             self.present(alertController, animated: true, completion: nil)
         } else {
-            saveToCloudKit(username: usernameTF.text!, fullname: fullNameTF.text!, email: emailTF.text!, password: passwordTF.text!)
+            saveToCloudKit(fullname: fullNameTF.text!, email: emailTF.text!, password: passwordTF.text!)
             
-            let alertController = UIAlertController(title: "Berhasil", message:
-                "Selamat nih registrasi kamu berhasil!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+            let alertController = UIAlertController(title: "Daftar Berhasil", message:
+                "Selamat nih daftar kamu berhasil!", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (done) in
+                
+                self.performSegue(withIdentifier: "mainSegue", sender: self)
+                
+            }))
             
             self.present(alertController, animated: true, completion: nil)
         }
