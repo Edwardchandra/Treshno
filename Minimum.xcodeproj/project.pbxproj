@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0420E6E12318DAA300DD1821 /* launchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420E6E02318DAA300DD1821 /* launchViewController.swift */; };
 		043BE12B230EB2C3004D12B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043BE12A230EB2C3004D12B1 /* AppDelegate.swift */; };
 		043BE130230EB2C3004D12B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE12E230EB2C3004D12B1 /* Main.storyboard */; };
 		043BE132230EB2C5004D12B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043BE131230EB2C5004D12B1 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0420E6E02318DAA300DD1821 /* launchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = launchViewController.swift; sourceTree = "<group>"; };
 		043BE127230EB2C3004D12B1 /* Minimum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minimum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043BE12A230EB2C3004D12B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		043BE12F230EB2C3004D12B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				B6DAD02F23131EA600668E60 /* LogInViewController.swift */,
 				B6DAD03023131EA600668E60 /* SignUpViewController.swift */,
 				B6DAD03A2313219300668E60 /* OnboardViewController.swift */,
+				0420E6E02318DAA300DD1821 /* launchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				FCCA2A45230EB97C007E6C8E /* LocationViewController.swift in Sources */,
 				B6DAD0432313C2CB00668E60 /* OngoingOrderViewController.swift in Sources */,
 				B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */,
+				0420E6E12318DAA300DD1821 /* launchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
