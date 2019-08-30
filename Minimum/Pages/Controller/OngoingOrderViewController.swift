@@ -20,41 +20,33 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     @IBOutlet weak var wasteCollectorNumber: UILabel!
     @IBOutlet weak var estimatedTime: UILabel!
     @IBOutlet weak var finishButton: UIButton!
-    @IBOutlet weak var fotoSampah: UIImageView!
     
     //MARK: Variables
     //variables to be used
-    private var userDestination: MKMapItem?
-    private var locationManager: CLLocationManager = CLLocationManager()
-    private var userLocation: CLLocation?
     
-    private var coordinateLatitude: [Double] = []
-    private var coordinateLongitude: [Double] = []
-    private var steps: Int = 0
+    var locationManager: CLLocationManager = CLLocationManager()
+//    private var steps: Int = 0
+    
+    let latCurrent : Double = 0.0
+    let longCurrent : Double = 0.0
     
     var navigation: [CLLocationCoordinate2D] = []
     
+    var currentStep: Int = 0
+    
     var pointAnnotation : CustomAnnotation!
     var pinAnnotationView : MKAnnotationView?
-    
-    var currentStep = 0
-    
+
     //Set Destination
     var latPinPoint: Double = 0.0
     var longPinPoint: Double = 0.0
     
-    var latCurrent : Double = 0.0
-    var longCurrent : Double = 0.0
-    
-    var sourceLocationData: String = ""
     var destinationLocationData: String = ""
     
-    var image: UIImage = UIImage(named: "Launch")!
+    var image: UIImage?
     
-    var sourceLocation: CLLocationCoordinate2D?
-    var destinationLocation: CLLocationCoordinate2D?
-    
-    var eta: TimeInterval?
+    var currDate: String!
+    var currTime: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,11 +58,17 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
 //        fotoSampah.image = image
         wasteCollectorImageView.image = UIImage(named: "wasteCollector")
         
-//        customizeElement()
+        customizeElement()
+        
+        estimatedTime.text = "Sedang dalam perjalanan"
         
         setupMap()
         
         navigate()
+        
+        getCurrentDate()
+        getCurrentTime()
+        
     }
     
     //MARK: Map Setup
@@ -79,9 +77,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
         //Set delegate to view controller
         userMapView.delegate = self
-        
-        //map view showing user location
-        userMapView.showsUserLocation = true
         
         //user location default value used
 //        userLocation = CLLocation(latitude: -6.301492, longitude: 106.652992)
@@ -106,33 +101,34 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     }
     
     func navigate(){
-        sourceLocation = CLLocationCoordinate2D(latitude: -6.309411, longitude: 106.647424) // Depan Unilever
-        destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
+        let sourceLocation = CLLocationCoordinate2D(latitude: -6.309411, longitude: 106.647424) // Depan Unilever
+        //sourceLocation = CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417)
+        let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
         print("Destination: \n latitude ", latPinPoint, "\n longitude ", longPinPoint)
         
         //MARK: - Pin Destination
         let pointDestination = MKPointAnnotation()
         pointDestination.coordinate = CLLocationCoordinate2D(
-            latitude: destinationLocation!.latitude,
-            longitude: destinationLocation!.longitude)
+            latitude: destinationLocation.latitude,
+            longitude: destinationLocation.longitude)
         
         let pinViewDestination = MKAnnotationView(annotation: pointDestination, reuseIdentifier: "destinationPin")
         
         userMapView.addAnnotation(pinViewDestination.annotation!)
         
         //MARK: - Set Camera Location
-        let centerLocation = CLLocationCoordinate2D(latitude: destinationLocation!.latitude, longitude: destinationLocation!.longitude)
-        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
+        let centerLocation = CLLocationCoordinate2D(latitude: destinationLocation.latitude, longitude: destinationLocation.longitude)
+        let regions = MKCoordinateRegion(center: centerLocation, latitudinalMeters: 1000.0, longitudinalMeters: 1000.0)
         
         self.userMapView.setRegion(regions, animated: true)
         
         //MARK: - Create Route
-        createRoute(withSource: sourceLocation!,
+        createRoute(withSource: sourceLocation,
                     andDestination: CLLocationCoordinate2D(
-                        latitude: destinationLocation!.latitude,
-                        longitude: destinationLocation!.longitude))
+                        latitude: destinationLocation.latitude,
+                        longitude: destinationLocation.longitude))
         
-        
+        destinationLocationData = "\(latPinPoint), \(longPinPoint)"
         
     }
     
@@ -149,7 +145,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         pinAnnotationView = MKAnnotationView(annotation: pointAnnotation, reuseIdentifier: "pin")
 
         userMapView.addAnnotation(pinAnnotationView!.annotation!)
-
+        
         move(arrayOfSteps: navigation)
         
         return renderer
@@ -170,7 +166,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
 //        userMapView.removeOverlays(userMapView.overlays)
         
         directions.calculate {
-            (response, error) -> Void in
+            [weak self] (response, error) -> Void in
             
             guard let response = response else {
                 if let error = error {
@@ -179,55 +175,36 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 
                 return
             }
+//
+//            for route in response.routes{
+//
+//            }
             
-            for route in response.routes{
-                self.eta = route.expectedTravelTime
-                
-                DispatchQueue.main.async {
-                    self.estimatedTime.text = self.stringFromTimeInterval(interval: self.eta!) as String
-                }
-                
-            }
-            
-            self.navigation.removeAll()
+            self?.navigation.removeAll()
             let route = response.routes[0]//tujuan
             let totalStep = response.routes[0].steps
             
             for i in 0 ..< totalStep.count{
                 print("Responses : \(response.routes[0].steps[i].polyline.coordinate)")
-                self.navigation.append(response.routes[0].steps[i].polyline.coordinate)
+                self?.navigation.append(response.routes[0].steps[i].polyline.coordinate)
             }
             
-            self.userMapView.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
+            self?.userMapView.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
             print("Cek Polyline: ", route.polyline.coordinate)
             
             
-            let rect = route.polyline.boundingMapRect
-            self.userMapView.setRegion(MKCoordinateRegion(rect), animated: true)
+            //self.userMapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
     }
     
-    func stringFromTimeInterval(interval: TimeInterval) -> NSString {
-        
-        let ti = NSInteger(interval)
-        
-//        let ms = Int((interval.truncatingRemainder(dividingBy: 1)) * 1000)
-//
-//        let seconds = ti % 60
-        let minutes = (ti / 60) % 60
-        let hours = (ti / 3600)
-        
-        return NSString(format: "Akan tiba dalam %d jam %d menit",hours,minutes)
-    }
-    
     //MARK:- Function Animate
-    func  moveCar(_ arrayOfSteps : [CLLocationCoordinate2D]) {
+    func moveCar(_ arrayOfSteps : [CLLocationCoordinate2D]) {
         move(arrayOfSteps: arrayOfSteps)
-        
     }
     
     func move(arrayOfSteps : [CLLocationCoordinate2D]){
         var timer = 0
+        
         switch currentStep{
         case 0:
             timer = 1
@@ -235,20 +212,23 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
             timer = 5
         }
         
-        if self.currentStep < arrayOfSteps.count{
+        if currentStep < arrayOfSteps.count{
             UIView.animate(withDuration: TimeInterval(timer), animations: {
                 self.pointAnnotation.coordinate = arrayOfSteps[self.currentStep]
-            }, completion:  { success in
+            }, completion:  { [weak self] success in
                 
                 // handle a successfully ended animation
-                if self.currentStep < arrayOfSteps.count - 1{
-                    self.currentStep += 1
-                    self.move(arrayOfSteps: arrayOfSteps)
+                if self?.currentStep ?? 0 < arrayOfSteps.count - 1{
+                    self?.currentStep += 1
+                    self?.move(arrayOfSteps: arrayOfSteps)
                 }else{
                     print("Hei, Your Picker already Arrive!")
                     
-                    self.finishButton.isEnabled = true
-                    self.finishButton.layer.opacity = 1
+                    self?.finishButton.isEnabled = true
+                    self?.finishButton.layer.opacity = 1
+                    self?.estimatedTime.text = "Sudah Sampai"
+                    
+                    
                 }
             })
         }else{
@@ -273,16 +253,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         
     }
     
-    func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ subStreet: String?, _ street: String?, _ city: String?, _ country:  String?, _ error: Error?) -> ()) {
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-            completion(placemarks?.first?.subThoroughfare,
-                       placemarks?.first?.thoroughfare,
-                       placemarks?.first?.locality,
-                       placemarks?.first?.country,
-                       error)
-        }
-    }
-    
     func customizeElement(){
         finishButton.layer.cornerRadius = 11
         cardView.layer.cornerRadius = 11
@@ -294,19 +264,48 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         finishButton.isEnabled = false
         finishButton.layer.opacity = 0.5
     }
+    
+    func getCurrentDate(){
+        let currentDate = Date()
+        
+        // initialize the date formatter and set the style
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .long
+        
+        print(formatter.string(from: currentDate))
+        
+        currDate = formatter.string(from: currentDate)
+    }
+    
+    func getCurrentTime(){
+        let currentTime = Date()
+        
+        // initialize the date formatter and set the style
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .none
+        
+        print(formatter.string(from: currentTime))
+        
+        currTime = formatter.string(from: currentTime)
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "orderReviewSegue"{
             
             let destination = segue.destination as! OrderReviewViewController
-            destination.source = sourceLocationData
             destination.destination = destinationLocationData
             destination.wasteImage = image
             destination.wasteCollector = wasteCollectorName.text!
+            destination.currentDate = currDate
+            destination.currentTime = currTime
         }
         
     }
+    
+    
     
     
 }

@@ -276,7 +276,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiba dalam 50 menit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfj-Wy-D5r">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sedang dalam perjalanan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfj-Wy-D5r">
                                         <rect key="frame" x="110" y="85" width="284" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -297,6 +297,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="finishAction:" destination="7VP-Ix-7nj" eventType="touchUpInside" id="Fjd-2B-fuW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -403,7 +406,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="finishAction:" destination="7VP-Ix-7nj" eventType="touchUpInside" id="roX-M9-gii"/>
                                     <action selector="finishAction:" destination="WeZ-Hs-81q" eventType="touchUpInside" id="vmu-mJ-CQ4"/>
                                     <action selector="getThisLocation:" destination="cwE-5I-rDF" eventType="touchUpInside" id="kth-Wk-9Je"/>
                                 </connections>
@@ -423,7 +425,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atp-Sd-klY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ci3-43-0FK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3763.7681159420295" y="864.50892857142856"/>
+            <point key="canvasLocation" x="3683" y="865"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Em9-eZ-htg">
