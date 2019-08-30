@@ -83,6 +83,11 @@ class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
                 
                 self.performSegue(withIdentifier: "mainSegue", sender: self)
                 
+                UserDefaults.standard.set(self.emailTF.text!, forKey: "emailUser")
+                UserDefaults.standard.set(self.passwordTF.text!, forKey: "passwordUser")
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+
+                
             }))
             
             self.present(alertController, animated: true, completion: nil)
@@ -91,6 +96,10 @@ class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
     
     func customizeSignUpButton(){
         signUpButton.layer.cornerRadius = 11
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 }
 
