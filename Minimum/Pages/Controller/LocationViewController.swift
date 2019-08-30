@@ -34,6 +34,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Pilih Lokasi Jemput"
 
         
         manager.delegate = self
@@ -127,7 +128,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         latPinPoint = coordinate.latitude
         longPinPoint = coordinate.longitude
         
-        self.locationPickedLabel.text = "Pick Up Location in \n\(latPinPoint), \(longPinPoint)"
+        self.locationPickedLabel.text = "\(latPinPoint), \(longPinPoint)"
         
     }
     
@@ -195,7 +196,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         //Get Name for Places
         let point = MKPlacemark(coordinate: annotation.coordinate)
-        self.locationPickedLabel.text = point.name
+//        self.locationPickedLabel.text = ""point.name
         
         //Set Value of Coordinate
         latPinPoint = annotation.coordinate.latitude
