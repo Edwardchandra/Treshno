@@ -13,6 +13,8 @@
 		043BE135230EB2C5004D12B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE133230EB2C5004D12B1 /* LaunchScreen.storyboard */; };
 		B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */; };
 		B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */; };
+		B67BA6CD231A7FA100E1A55D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67BA6CC231A7FA100E1A55D /* HistoryViewController.swift */; };
+		B67BA6CF231A8F1600E1A55D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67BA6CE231A8F1600E1A55D /* HistoryTableViewCell.swift */; };
 		B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69E19A52314E9FB00E33D06 /* Onboard.xib */; };
 		B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E19A92314EB3E00E33D06 /* Onboard.swift */; };
 		B69E19AF23151F0B00E33D06 /* OrderReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */; };
@@ -39,6 +41,8 @@
 		043BE136230EB2C5004D12B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerAnnotationView.swift; sourceTree = "<group>"; };
+		B67BA6CC231A7FA100E1A55D /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		B67BA6CE231A8F1600E1A55D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B69E19A52314E9FB00E33D06 /* Onboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Onboard.xib; sourceTree = "<group>"; };
 		B69E19A92314EB3E00E33D06 /* Onboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard.swift; sourceTree = "<group>"; };
 		B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReviewViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			children = (
 				B69E19A52314E9FB00E33D06 /* Onboard.xib */,
 				B69E19A92314EB3E00E33D06 /* Onboard.swift */,
+				B67BA6CE231A8F1600E1A55D /* HistoryTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				B6DAD04423145F2100668E60 /* OrderViewController.swift */,
 				B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */,
 				B69E19B12315B8AB00E33D06 /* CameraViewController.swift */,
+				B67BA6CC231A7FA100E1A55D /* HistoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -299,7 +305,9 @@
 				FCCA2A41230EB8FD007E6C8E /* MainViewController.swift in Sources */,
 				FCCA2A47230EB9D2007E6C8E /* CompletedViewController.swift in Sources */,
 				B6DAD03123131EA600668E60 /* LogInViewController.swift in Sources */,
+				B67BA6CD231A7FA100E1A55D /* HistoryViewController.swift in Sources */,
 				B69E19AF23151F0B00E33D06 /* OrderReviewViewController.swift in Sources */,
+				B67BA6CF231A8F1600E1A55D /* HistoryTableViewCell.swift in Sources */,
 				B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */,
 				B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */,
 				B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */,

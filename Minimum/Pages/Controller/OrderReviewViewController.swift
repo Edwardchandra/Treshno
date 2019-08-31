@@ -30,12 +30,12 @@ class OrderReviewViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.title = "Pesanan Selesai"
-        //self.navigationItem.setHidesBackButton(true, animated:true)
+        self.navigationItem.setHidesBackButton(true, animated:true)
 //        self.navigationItem.title = ""
         
-        let cancelButton = UIBarButtonItem.init(image: UIImage(named: "unavailable"), style: .plain, target: self, action: #selector(cancelAction))
+        //let cancelButton = UIBarButtonItem.init(image: UIImage(named: "unavailable"), style: .plain, target: self, action: #selector(cancelAction))
         
-        self.navigationController?.navigationItem.leftBarButtonItem = cancelButton
+        //self.navigationController?.navigationItem.leftBarButtonItem = cancelButton
         
         wasteCollectorName.text = wasteCollector
         wasteImageView.image = wasteImage
@@ -67,7 +67,13 @@ class OrderReviewViewController: UIViewController {
             return
         }
         
-        saveToCloudKit(name: wasteCollectorName.text!, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!
+        print(wasteCollector)
+        print(destination)
+        print(currentTime)
+        print(currentDate)
+        print(CKAsset(fileURL: url!))
+        
+        saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!
         ))
         
     }
