@@ -19,6 +19,8 @@ class OrderReviewViewController: UIViewController {
     var currentDate: String = ""
     var currentTime: String = ""
     
+    var flag: Int = 0
+    
     @IBOutlet weak var wasteCollectorName: UILabel!
     @IBOutlet weak var pickUpLocation: UILabel!
     @IBOutlet weak var wasteImageView: UIImageView!
@@ -42,23 +44,11 @@ class OrderReviewViewController: UIViewController {
         pickUpLocation.text = destination
         
         customizeButton()
+//
+//        let data = wasteImage!.pngData(); // UIImage -> NSData, see also UIImageJPEGRepresentation
+//
+        let data = wasteImage!.jpegData(compressionQuality: 0.4)
         
-        
-        
-    }
-    
-    @objc func cancelAction(){
-        let alert = UIAlertController(title: "Perhatian", message: "Apakah anda ingin membatalkan pengambilan sampah?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Keluar", style: .cancel, handler: { (back) in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Tidak", style: .default, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
-    
-    @IBAction func finishAction(_ sender: Any) {
-        let data = wasteImage!.pngData(); // UIImage -> NSData, see also UIImageJPEGRepresentation
         let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
         do {
             try data!.write(to: url!, options: [])
@@ -76,6 +66,23 @@ class OrderReviewViewController: UIViewController {
         saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!
         ))
         
+    }
+    
+    @objc func cancelAction(){
+        let alert = UIAlertController(title: "Perhatian", message: "Apakah anda ingin membatalkan pengambilan sampah?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Keluar", style: .cancel, handler: { (back) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Tidak", style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
+    @IBAction func finishAction(_ sender: Any) {
+        
+        if flag == 1{
+            performSegue(withIdentifier: "unwindMainSegue", sender: self)
+        }
     }
     
     func customizeButton(){
@@ -96,6 +103,7 @@ class OrderReviewViewController: UIViewController {
         database.save(newHistory) { (record, error) in
             guard record != nil else {return}
             print("success")
+            self.flag = 1
         }
     }
     

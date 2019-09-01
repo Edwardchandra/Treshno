@@ -10,8 +10,6 @@ import UIKit
 import CloudKit
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
-    
     
     @IBOutlet weak var historyTableView: UITableView!
     
@@ -21,8 +19,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "Riwayat Pesanan"
+        
         refreshPage()
         queryDatabase()
+        historyTableView.reloadData()
     }
     
     func refreshPage(){
@@ -61,10 +62,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell = historyTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HistoryTableViewCell
         
-        let name = history[indexPath.row].value(forKey: "name") as! String
-        let destination = history[indexPath.row].value(forKey: "destination") as! String
-        let date = history[indexPath.row].value(forKey: "date") as! String
-        let time = history[indexPath.row].value(forKey: "time") as! String
+        let name = history[indexPath.row].value(forKey: "name") as? String
+        let destination = history[indexPath.row].value(forKey: "destination") as? String
+        let date = history[indexPath.row].value(forKey: "date") as? String
+        let time = history[indexPath.row].value(forKey: "time") as? String
         
         let asset = history[indexPath.row]["image"] as? CKAsset
         
@@ -76,9 +77,41 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.historyLocation.text = destination
         cell.historyWasteCollectorName.text = name
-        cell.historyDateAndTime.text = date + " at " + time
+        cell.historyDateAndTime.text = date! + ", " + time!
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "historyDetailSegue", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "historyDetailSegue"{
+            if let indexPath = historyTableView.indexPathForSelectedRow {
+                guard let destViewController = segue.destination as? HistoryDetailViewController else {return}
+                
+                let name = history[indexPath.row].value(forKey: "name") as? String
+                let destination = history[indexPath.row].value(forKey: "destination") as? String
+                let date = history[indexPath.row].value(forKey: "date") as? String
+                let time = history[indexPath.row].value(forKey: "time") as? String
+                
+                let asset = history[indexPath.row]["image"] as? CKAsset
+                
+                let imageData = NSData(contentsOf: (asset?.fileURL!)!)
+                
+                let image = UIImage(data: imageData! as Data)
+                
+                destViewController.image = image
+                destViewController.destination = destination
+                destViewController.wasteCollectorName = name
+                destViewController.dateTime = date! + ", " + time!
+            }
+        }
+        
     }
     
 }
