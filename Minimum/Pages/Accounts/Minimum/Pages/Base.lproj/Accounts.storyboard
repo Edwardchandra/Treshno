@@ -213,7 +213,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OrderViewController" id="kZf-YD-aHe" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKS-ne-knN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="399" y="545"/>
+            <point key="canvasLocation" x="-1109" y="893"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="e0d-UN-tIo">
@@ -331,7 +331,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYl-27-hqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CFC-bk-OUl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-510.14492753623193" y="863.83928571428567"/>
+            <point key="canvasLocation" x="-1842" y="893"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vxV-aq-ooD">
@@ -364,6 +364,6 @@
         <image name="BG" width="414" height="896"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5f0-Ru-029"/>
+        <segue reference="7za-kH-JUa"/>
     </inferredMetricsTieBreakers>
 </document>
