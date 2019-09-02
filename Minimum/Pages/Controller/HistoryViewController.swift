@@ -20,6 +20,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
 
         self.navigationItem.title = "Riwayat Pesanan"
+        historyTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         refreshPage()
         queryDatabase()
@@ -29,6 +30,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func refreshPage(){
         
         let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = #colorLiteral(red: 0.9399943352, green: 0.3158932626, blue: 0.0476225093, alpha: 1)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(queryDatabase), for: .valueChanged)
         self.historyTableView.refreshControl = refreshControl
@@ -39,8 +41,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func queryDatabase(){
         
         let query = CKQuery(recordType: "History", predicate: NSPredicate(value: true))
+        
         database.perform(query, inZoneWith: nil) { (records, error) in
-            
             guard let records = records else {return}
             let sortedRecords = records.sorted(by: {$0.creationDate! > $1.creationDate!})
             
@@ -49,6 +51,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.historyTableView.refreshControl?.endRefreshing()
                 self.historyTableView.reloadData()
             }
+            print("History = ", self.history)
         }
         
     }
@@ -59,6 +62,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        historyTableView.deselectRow(at: indexPath, animated: true)
         
         let cell = historyTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HistoryTableViewCell
         
@@ -72,8 +76,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let imageData = NSData(contentsOf: (asset?.fileURL!)!)
         
         let image = UIImage(data: imageData! as Data)
-        cell.historyWasteImageView.image = image
         
+        cell.historyWasteImageView.image = image
+//        cell.historyWasteImageView.layer.cornerRadius = cell.historyWasteImageView.frame.height/2
         
         cell.historyLocation.text = destination
         cell.historyWasteCollectorName.text = name

@@ -102,7 +102,10 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
     
     func navigate(){
         //let sourceLocation = CLLocationCoordinate2D(latitude: -6.309411, longitude: 106.647424) // Depan Unilever
-        let sourceLocation = CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417)
+//        let sourceLocation = CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417)
+        
+        let sourceLocation = CLLocationCoordinate2D(latitude: -6.3102337, longitude: 106.6476994)
+        
         let destinationLocation = CLLocationCoordinate2D(latitude: latPinPoint, longitude: longPinPoint)
         print("Destination: \n latitude ", latPinPoint, "\n longitude ", longPinPoint)
         
@@ -128,7 +131,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
                         latitude: destinationLocation.latitude,
                         longitude: destinationLocation.longitude))
         
-        destinationLocationData = "\(latPinPoint), \(longPinPoint)"
+//        destinationLocationData = "\(latPinPoint), \(longPinPoint)"
         
     }
     

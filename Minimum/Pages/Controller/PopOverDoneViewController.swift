@@ -15,13 +15,13 @@ class PopOverDoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Opacity50")!)
 
 
     }
     
     @IBAction func selesaiButton(_ sender: Any) {
         self.dismiss(animated: true) {
-            self.performSegue(withIdentifier: "orderReviewSegue", sender: self)
         }
     }
     

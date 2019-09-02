@@ -11,6 +11,8 @@ import CloudKit
 
 class OrderReviewViewController: UIViewController {
 
+    @IBOutlet weak var actIndicator: UIActivityIndicatorView!
+    
     let database = CKContainer.default().privateCloudDatabase
     
     var destination: String = ""
@@ -47,7 +49,7 @@ class OrderReviewViewController: UIViewController {
 //
 //        let data = wasteImage!.pngData(); // UIImage -> NSData, see also UIImageJPEGRepresentation
 //
-        let data = wasteImage!.jpegData(compressionQuality: 0.4)
+        let data = wasteImage!.jpegData(compressionQuality: 0.1)
         
         let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
         do {
@@ -63,9 +65,12 @@ class OrderReviewViewController: UIViewController {
         print(currentDate)
         print(CKAsset(fileURL: url!))
         
-        saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!
-        ))
+        saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!))
         
+        actIndicator.startAnimating()
+        actIndicator.hidesWhenStopped = true
+        finishButton.isEnabled = false
+        finishButton.backgroundColor = UIColor.lightGray
     }
     
     @objc func cancelAction(){
@@ -81,7 +86,7 @@ class OrderReviewViewController: UIViewController {
     @IBAction func finishAction(_ sender: Any) {
         
         if flag == 1{
-            performSegue(withIdentifier: "unwindMainSegue", sender: self)
+            performSegue(withIdentifier: "unwindToMainPage", sender: self)
         }
     }
     
@@ -92,6 +97,8 @@ class OrderReviewViewController: UIViewController {
     //MARK: Save data to CloudKit
     func saveToCloudKit(name: String, dest: String, currDate: String, currTime: String, image: CKAsset){
         
+        print("Uploading to Cloudkit")
+        
         let newHistory = CKRecord(recordType: "History")
         
         newHistory.setValue(name, forKey: "name")
@@ -101,9 +108,18 @@ class OrderReviewViewController: UIViewController {
         newHistory.setValue(image, forKey: "image")
         
         database.save(newHistory) { (record, error) in
-            guard record != nil else {return}
+            print("Done upload to CK")
+            guard record != nil else {
+                print("Error found", error)
+                return}
             print("success")
             self.flag = 1
+            DispatchQueue.main.async {
+                self.finishButton.isEnabled = true
+                self.finishButton.backgroundColor = #colorLiteral(red: 0.9338529706, green: 0.314417243, blue: 0.05114612728, alpha: 1)
+                self.actIndicator.stopAnimating()
+            }
+            
         }
     }
     
@@ -119,4 +135,10 @@ class OrderReviewViewController: UIViewController {
     }
     */
 
+}
+
+extension OrderReviewViewController{
+    override func viewWillAppear(_ animated: Bool) {
+        self.performSegue(withIdentifier: "show_popup", sender: self)
+    }
 }

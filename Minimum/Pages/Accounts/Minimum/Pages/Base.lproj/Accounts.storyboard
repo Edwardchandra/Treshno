@@ -278,18 +278,18 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pro-xU-3KN">
-                                <rect key="frame" x="20" y="344" width="374" height="50"/>
+                                <rect key="frame" x="20" y="344" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="FXh-Ui-5n7"/>
+                                    <constraint firstAttribute="height" constant="40" id="FXh-Ui-5n7"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vcd-dA-ea4">
-                                <rect key="frame" x="20" y="414" width="374" height="50"/>
+                                <rect key="frame" x="20" y="404" width="374" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="6Ce-OV-o2C"/>
+                                    <constraint firstAttribute="height" constant="40" id="6Ce-OV-o2C"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

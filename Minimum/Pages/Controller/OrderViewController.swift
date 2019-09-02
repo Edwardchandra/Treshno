@@ -105,6 +105,9 @@ class OrderViewController: UIViewController, UITextViewDelegate, UIScrollViewDel
     }
     
     
+    @IBAction func historyButton(_ sender: Any) {
+        
+    }
     
     @IBAction func orderNowAction(_ sender: Any) {
         if wasteImageView.image == UIImage(named: "addImage") || addressLabel.text == "Tidak Ada Alamat"{
@@ -192,6 +195,7 @@ extension OrderViewController{
     //return at keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+        catatanTF.endEditing(true)
         return false
     }
     
@@ -216,9 +220,10 @@ extension OrderViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
-//        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9359218478, green: 0.3116736412, blue: 0.05137557536, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.9399943352, green: 0.3158932626, blue: 0.0476225093, alpha: 1)
-//        self.navigationController?.navigationBar.col
+        let colors = #colorLiteral(red: 0.9338529706, green: 0.314417243, blue: 0.05114612728, alpha: 1)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : colors]
     }
     
     override func viewWillDisappear(_ animated: Bool) {
