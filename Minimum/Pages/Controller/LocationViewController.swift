@@ -32,8 +32,11 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     var latPinPoint: Double = 0.0
     var longPinPoint: Double = 0.0
     
+    var locationDetail = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Pilih Lokasi Jemput"
 
         customizeElement()
         
@@ -129,8 +132,10 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         latPinPoint = coordinate.latitude
         longPinPoint = coordinate.longitude
         
-        self.locationPickedLabel.text = "Pick Up Location in \n\(latPinPoint), \(longPinPoint)"
-        
+        getNameLocation(coordinate: annotation.coordinate)
+
+//        locationPickedLabel.text = getNameLocation(coordinate: annotation.coordinate)
+
     }
     
     @IBAction func getMyLocationAction(_ sender: Any) {
@@ -167,15 +172,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ subStreet: String?, _ street: String?, _ city: String?, _ country:  String?, _ error: Error?) -> ()) {
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-            completion(placemarks?.first?.subThoroughfare,
-                       placemarks?.first?.thoroughfare,
-                       placemarks?.first?.locality,
-                       placemarks?.first?.country,
-                       error)
-        }
-    }
     
     //MARK: Location Manager when Updated
     //function run when location is updated
@@ -195,9 +191,9 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         annotation.title = "Pick Up Location"
         self.userMapView.addAnnotation(annotation)
         
+         getNameLocation(coordinate: annotation.coordinate)
+        
         //Get Name for Places
-        let point = MKPlacemark(coordinate: annotation.coordinate)
-        self.locationPickedLabel.text = point.name
         
         //Set Value of Coordinate
         latPinPoint = annotation.coordinate.latitude
@@ -228,4 +224,45 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         getCurrentLocationOutlet.layer.cornerRadius = 11
     }
     
+    func getNameLocation(coordinate: CLLocationCoordinate2D){
+        var city = ""
+        var nameLoc = ""
+        var locationLoc = ""
+        var countryLoc = ""
+        
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude)
+        geoCoder.reverseGeocodeLocation(location, completionHandler:
+            {
+                placemarks, error -> Void in
+                
+                // Place details
+                guard let placeMark = placemarks?.first else { return }
+                
+                if let name = placeMark.name{
+                    print("name ", name)
+                    nameLoc = name
+                }
+                
+                // Location name
+                if let locationName = placeMark.subLocality {
+                    print("locName ", locationName)
+                    locationLoc = locationName
+                }
+ 
+                // Country
+                if let country = placeMark.country {
+                    print("Country ", country)
+                    countryLoc = country
+                    
+                }
+                city = "\(nameLoc), \(locationLoc), \(countryLoc)"
+                print("City: ", city)
+                
+                self.locationPickedLabel.text = city
+                self.locationDetail = city
+        })
+    }
 }

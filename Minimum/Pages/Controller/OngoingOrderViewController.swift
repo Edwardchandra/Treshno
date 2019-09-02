@@ -233,6 +233,7 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
             })
         }else{
             print("Hei, Your Picker already Arrive!")
+            self.performSegue(withIdentifier: "selesaiCuy", sender: self)
         }
     }
     
