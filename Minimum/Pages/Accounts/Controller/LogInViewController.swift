@@ -80,6 +80,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 
                 performSegue(withIdentifier: "mainSegue", sender: self)
+                
+//                var initStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                UI.window?.rootViewController = initStoryboard.instantiateInitialViewController()
+//                self.window?.makeKeyAndVisible()
+                
             }else{
                 let alert = UIAlertController(title: "Maaf", message: "Silakan coba login kembali", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -110,5 +115,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }

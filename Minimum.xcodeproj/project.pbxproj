@@ -12,6 +12,7 @@
 		043BE130230EB2C3004D12B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE12E230EB2C3004D12B1 /* Main.storyboard */; };
 		043BE132230EB2C5004D12B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043BE131230EB2C5004D12B1 /* Assets.xcassets */; };
 		043BE135230EB2C5004D12B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE133230EB2C5004D12B1 /* LaunchScreen.storyboard */; };
+		049FBCE92319534100E74F99 /* PopOverDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049FBCE82319534100E74F99 /* PopOverDoneViewController.swift */; };
 		B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */; };
 		B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */; };
 		B69E19A62314E9FB00E33D06 /* Onboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = B69E19A52314E9FB00E33D06 /* Onboard.xib */; };
@@ -39,6 +40,7 @@
 		043BE131230EB2C5004D12B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		043BE134230EB2C5004D12B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		043BE136230EB2C5004D12B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		049FBCE82319534100E74F99 /* PopOverDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverDoneViewController.swift; sourceTree = "<group>"; };
 		B625A9E3230FC93F00915B0A /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		B625A9E5230FC99C00915B0A /* MarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerAnnotationView.swift; sourceTree = "<group>"; };
 		B69E19A52314E9FB00E33D06 /* Onboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Onboard.xib; sourceTree = "<group>"; };
@@ -91,10 +93,10 @@
 		043BE129230EB2C3004D12B1 /* Minimum */ = {
 			isa = PBXGroup;
 			children = (
+				043BE12A230EB2C3004D12B1 /* AppDelegate.swift */,
 				B69E19AB23151D5E00E33D06 /* Utils */,
 				B6DAD03C231321A300668E60 /* Minimum.entitlements */,
 				FCCA2A39230EB890007E6C8E /* Pages */,
-				043BE12A230EB2C3004D12B1 /* AppDelegate.swift */,
 				043BE131230EB2C5004D12B1 /* Assets.xcassets */,
 				043BE133230EB2C5004D12B1 /* LaunchScreen.storyboard */,
 				043BE136230EB2C5004D12B1 /* Info.plist */,
@@ -210,6 +212,7 @@
 				B6DAD04423145F2100668E60 /* OrderViewController.swift */,
 				B69E19AE23151F0B00E33D06 /* OrderReviewViewController.swift */,
 				B69E19B12315B8AB00E33D06 /* CameraViewController.swift */,
+				049FBCE82319534100E74F99 /* PopOverDoneViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				B6DAD03123131EA600668E60 /* LogInViewController.swift in Sources */,
 				B69E19AF23151F0B00E33D06 /* OrderReviewViewController.swift in Sources */,
 				B625A9E6230FC99C00915B0A /* MarkerAnnotationView.swift in Sources */,
+				049FBCE92319534100E74F99 /* PopOverDoneViewController.swift in Sources */,
 				B69E19AA2314EB3E00E33D06 /* Onboard.swift in Sources */,
 				B6DAD03223131EA600668E60 /* SignUpViewController.swift in Sources */,
 				B69E19B22315B8AB00E33D06 /* CameraViewController.swift in Sources */,

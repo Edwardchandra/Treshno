@@ -16,6 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var initStoryboard = UIStoryboard()
+         if UserDefaults.standard.bool(forKey: "isLoggedIn") == true{
+            initStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        }else{
+            initStoryboard = UIStoryboard(name: "Accounts", bundle: nil)
+        }
+        
+        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = initStoryboard.instantiateInitialViewController()
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

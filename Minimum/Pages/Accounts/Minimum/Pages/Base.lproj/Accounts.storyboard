@@ -63,6 +63,7 @@
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hhp-ye-hOh">
                                 <rect key="frame" x="0.0" y="288" width="414" height="260"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,11 +94,12 @@
                         <outlet property="scrollView" destination="Hhp-ye-hOh" id="kMv-Ch-Zd1"/>
                         <outlet property="signInButton" destination="ww3-gA-zG4" id="ScY-Xn-UkE"/>
                         <outlet property="signUpButton" destination="doH-08-xa7" id="aIj-dg-289"/>
+                        <segue destination="kZf-YD-aHe" kind="show" identifier="goToMain" id="5f0-Ru-029"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pr6-Mi-cpz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-510.14492753623193" y="137.94642857142856"/>
+            <point key="canvasLocation" x="-1465" y="138"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="QvZ-on-qgl">
@@ -123,8 +125,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gB-Vu-W6P">
-                                <rect key="frame" x="20" y="98" width="64" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gB-Vu-W6P">
+                                <rect key="frame" x="20" y="98" width="194" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="mMa-JZ-XYH"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Kembali">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -169,7 +174,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="stF-bT-H8V" firstAttribute="trailing" secondItem="IJe-J9-JmH" secondAttribute="trailing" constant="20" id="0KR-Q3-Ge6"/>
+                            <constraint firstItem="stF-bT-H8V" firstAttribute="trailing" secondItem="4i0-Al-KKB" secondAttribute="trailing" constant="269" id="1M0-Pg-thA"/>
                             <constraint firstItem="gRJ-yS-iOA" firstAttribute="top" secondItem="YCZ-Qa-23B" secondAttribute="bottom" constant="20" id="1hY-nw-ruw"/>
+                            <constraint firstItem="stF-bT-H8V" firstAttribute="trailing" secondItem="8gB-Vu-W6P" secondAttribute="trailing" constant="200" id="7Tq-3P-CrH"/>
                             <constraint firstItem="stF-bT-H8V" firstAttribute="trailing" secondItem="YCZ-Qa-23B" secondAttribute="trailing" constant="20" id="JLt-M0-Ykp"/>
                             <constraint firstItem="4i0-Al-KKB" firstAttribute="leading" secondItem="stF-bT-H8V" secondAttribute="leading" constant="20" id="Nso-ue-zka"/>
                             <constraint firstItem="stF-bT-H8V" firstAttribute="bottom" secondItem="IJe-J9-JmH" secondAttribute="bottom" constant="10" id="Pfh-yG-FuB"/>
@@ -183,6 +190,7 @@
                             <constraint firstItem="LPK-3h-sLt" firstAttribute="top" secondItem="4i0-Al-KKB" secondAttribute="bottom" constant="10" id="rla-MU-lNp"/>
                             <constraint firstItem="YCZ-Qa-23B" firstAttribute="top" secondItem="LPK-3h-sLt" secondAttribute="bottom" constant="50" id="s5X-tX-stg"/>
                             <constraint firstItem="YCZ-Qa-23B" firstAttribute="leading" secondItem="stF-bT-H8V" secondAttribute="leading" constant="20" id="v2i-S1-A5r"/>
+                            <constraint firstItem="stF-bT-H8V" firstAttribute="trailing" secondItem="LPK-3h-sLt" secondAttribute="trailing" constant="175" id="xac-gm-TtM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="stF-bT-H8V"/>
                     </view>
@@ -197,15 +205,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nN4-oc-9iq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ajl-P6-0Aw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="400" y="138"/>
+            <point key="canvasLocation" x="-512" y="138"/>
         </scene>
-        <!--Main-->
+        <!--OrderViewController-->
         <scene sceneID="s4n-cP-j9i">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="kZf-YD-aHe" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="OrderViewController" id="kZf-YD-aHe" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKS-ne-knN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-510" y="1582"/>
+            <point key="canvasLocation" x="399" y="545"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="e0d-UN-tIo">
@@ -333,6 +341,14 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LiA-sg-D6l">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.86988455060000003" green="0.36150905490000002" blue="0.16850143670000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="0.86988455060000003" green="0.36150905490000002" blue="0.16850143670000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -341,13 +357,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDN-uh-daz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562.3188405797102" y="137.94642857142856"/>
+            <point key="canvasLocation" x="-2454" y="138"/>
         </scene>
     </scenes>
     <resources>
         <image name="BG" width="414" height="896"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lzQ-N2-SS3"/>
+        <segue reference="5f0-Ru-029"/>
     </inferredMetricsTieBreakers>
 </document>
