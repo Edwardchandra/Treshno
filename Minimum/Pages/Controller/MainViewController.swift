@@ -13,6 +13,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var mulaiButton: UIButton!
     @IBOutlet weak var onboardScrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var historyButton: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         
         pageControl.isEnabled = false
         
+        historyGesture()
         
         setupScrollView()
     }
@@ -91,6 +93,15 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         
         // Show the Navigation Bar
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    func historyGesture(){
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.historyAction))
+        historyButton.addGestureRecognizer(gesture)
+    }
+    
+    @objc func historyAction(){
+        performSegue(withIdentifier: "historySegue", sender: self)
     }
     
     func customizeElement(_ obj: UIView){

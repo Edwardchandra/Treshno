@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import CloudKit
 
 class OrderReviewViewController: UIViewController {
 
-    var source: String = ""
+    let database = CKContainer.default().privateCloudDatabase
+    
     var destination: String = ""
     var wasteImage: UIImage?
     var wasteCollector: String = ""
+    var currentDate: String = ""
+    var currentTime: String = ""
+    
+    var flag: Int = 0
     
     @IBOutlet weak var wasteCollectorName: UILabel!
     @IBOutlet weak var pickUpLocation: UILabel!
@@ -26,18 +32,40 @@ class OrderReviewViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.title = "Pesanan Selesai"
-//        self.navigationItem.setHidesBackButton(true, animated:true)
+        self.navigationItem.setHidesBackButton(true, animated:true)
 //        self.navigationItem.title = ""
         
-        let cancelButton = UIBarButtonItem.init(image: UIImage(named: "unavailable"), style: .plain, target: self, action: #selector(cancelAction))
+        //let cancelButton = UIBarButtonItem.init(image: UIImage(named: "unavailable"), style: .plain, target: self, action: #selector(cancelAction))
         
-        self.navigationController?.navigationItem.leftBarButtonItem = cancelButton
+        //self.navigationController?.navigationItem.leftBarButtonItem = cancelButton
         
         wasteCollectorName.text = wasteCollector
         wasteImageView.image = wasteImage
         pickUpLocation.text = destination
         
         customizeButton()
+//
+//        let data = wasteImage!.pngData(); // UIImage -> NSData, see also UIImageJPEGRepresentation
+//
+        let data = wasteImage!.jpegData(compressionQuality: 0.4)
+        
+        let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
+        do {
+            try data!.write(to: url!, options: [])
+        } catch let e as NSError {
+            print("Error! \(e)");
+            return
+        }
+        
+        print(wasteCollector)
+        print(destination)
+        print(currentTime)
+        print(currentDate)
+        print(CKAsset(fileURL: url!))
+        
+        saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!
+        ))
+        
     }
     
     @objc func cancelAction(){
@@ -51,11 +79,32 @@ class OrderReviewViewController: UIViewController {
     }
     
     @IBAction func finishAction(_ sender: Any) {
-        performSegue(withIdentifier: "unwindMainSegue", sender: self)
+        
+        if flag == 1{
+            performSegue(withIdentifier: "unwindMainSegue", sender: self)
+        }
     }
     
     func customizeButton(){
         finishButton.layer.cornerRadius = 11
+    }
+    
+    //MARK: Save data to CloudKit
+    func saveToCloudKit(name: String, dest: String, currDate: String, currTime: String, image: CKAsset){
+        
+        let newHistory = CKRecord(recordType: "History")
+        
+        newHistory.setValue(name, forKey: "name")
+        newHistory.setValue(dest, forKey: "destination")
+        newHistory.setValue(currDate, forKey: "date")
+        newHistory.setValue(currTime, forKey: "time")
+        newHistory.setValue(image, forKey: "image")
+        
+        database.save(newHistory) { (record, error) in
+            guard record != nil else {return}
+            print("success")
+            self.flag = 1
+        }
     }
     
     

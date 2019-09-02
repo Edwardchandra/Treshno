@@ -36,6 +36,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         super.viewDidLoad()
         self.title = "Pilih Lokasi Jemput"
 
+        customizeElement()
         
         manager.delegate = self
         userMapView.delegate = self
@@ -45,6 +46,7 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         setupMap()
         
         addPinPoint()
+        
         
     }
     
@@ -222,4 +224,9 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         //print the error description
         print(error.localizedDescription)
     }
+    
+    func customizeElement(){
+        getCurrentLocationOutlet.layer.cornerRadius = 11
+    }
+    
 }
