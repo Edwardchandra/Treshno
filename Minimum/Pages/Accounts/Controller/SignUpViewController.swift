@@ -12,6 +12,7 @@ import CloudKit
 class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDelegate {
 
     let database = CKContainer.default().privateCloudDatabase
+    var accounts = [CKRecord]()
     
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
@@ -67,7 +68,23 @@ class SignUpViewController: UIViewController,UITextFieldDelegate,UIScrollViewDel
         }
     }
     
+    @objc func queryDatabase(){
+        
+        let query = CKQuery(recordType: "History", predicate: NSPredicate(value: true))
+        
+        database.perform(query, inZoneWith: nil) { (records, error) in
+            guard let records = records else {return}
+            let sortedRecords = records.sorted(by: {$0.creationDate! > $1.creationDate!})
+            
+            self.accounts = sortedRecords
+            print("History = ", self.accounts)
+        }
+        
+    }
+    
     @IBAction func signUpAction(_ sender: Any) {
+        queryDatabase()
+        
         if fullNameTF.text == "" || emailTF.text == "" || passwordTF.text == ""  {
             let alertController = UIAlertController(title: "Perhatian", message:
                 "Silakan isi semua field", preferredStyle: .alert)

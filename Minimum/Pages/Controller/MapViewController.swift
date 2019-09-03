@@ -50,12 +50,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //when the ui elements is being loaded
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //calling the setupMap function to setting up the map
         setupMap()
-        
-        //calling the getRouteDirection function to start showing the route direction to the destination
-        //getRouteDirection()
         addPinPoint()
         
     }
@@ -103,52 +98,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.userLocation = location
         }
     }
-    
-    //MARK: Get Route Direction
-//    //getting route direction to show in the map
-//    func getRouteDirection() {
-//
-//        //request the direction
-//        let request = MKDirections.Request()
-//
-//        //getting the starting point of the direction
-//        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: -6.301492, longitude: 106.652992), addressDictionary: nil))
-//
-//        //setting the destination that the direction headed to
-//        userDestination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: -6.298421, longitude: 106.669778), addressDictionary: nil))
-//
-//        //optional binding to prevent fatal error when return nil
-//        if let destination = userDestination {
-//
-//            //getting the destination point of the direction
-//            request.destination = destination
-//        }
-//
-//        //disable the alternate route that direction can show
-//        request.requestsAlternateRoutes = false
-//
-//        //setting the direction with request declared above
-//        let directions = MKDirections(request: request)
-//
-//        //calculate the route for the direction
-//        directions.calculate { (response, error) in
-//
-//            //check if there's an error
-//            if let error = error {
-//
-//                //print the cause description of the error
-//                print(error.localizedDescription)
-//            } else {
-//
-//                //optional binding to prevent fatal error when return nil
-//                if let response = response {
-//
-//                    //calling the show route function to start showing the route
-//                    self.showRoute(response)
-//                }
-//            }
-//        }
-//    }
     
     func center(onRoute route: [CLLocationCoordinate2D], fromDistance km: Double) {
         let center = MKPolyline(coordinates: route, count: route.count).coordinate

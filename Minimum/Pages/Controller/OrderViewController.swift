@@ -31,9 +31,10 @@ class OrderViewController: UIViewController, UITextViewDelegate, UIScrollViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         customizeElement()
         wasteImageViewGesture()
+        checkAllValue()
         
         let notificationCenter = NotificationCenter.default
         
@@ -42,6 +43,11 @@ class OrderViewController: UIViewController, UITextViewDelegate, UIScrollViewDel
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         scrollView.addGestureRecognizer(tapGesture)
+    }
+    
+    public func checkValue ()
+    {
+        
     }
     
     @objc func viewTapped(){
@@ -110,7 +116,7 @@ class OrderViewController: UIViewController, UITextViewDelegate, UIScrollViewDel
     }
     
     @IBAction func orderNowAction(_ sender: Any) {
-        if wasteImageView.image == UIImage(named: "addImage") || addressLabel.text == "Tidak Ada Alamat"{
+        if wasteImageView.image == UIImage(named: "addImage") || addressLabel.tag == 0{
             print("fail")
             
             let alert = UIAlertController(title: "Perhatian", message: "Pilih Alamat dan Masukkan Gambar Dulu yaa", preferredStyle: .alert)
@@ -136,13 +142,20 @@ class OrderViewController: UIViewController, UITextViewDelegate, UIScrollViewDel
             print("New Long, ", longitudeData)
             print("New Address, ", address)
             
-            addressLabel.text = address
+            if address != "" {
+                addressLabel.tag = 1
+                addressLabel.text = address
+            } else {
+                addressLabel.tag = 0
+            }
 //            locationPickerButton.titleLabel?.text = "Ganti Lokasi"
         }else if let sourceViewController = sender.source as? CameraViewController{
             image = sourceViewController.image
             
             wasteImageView.image = image
         }
+        
+        self.checkAllValue()
     }
     
     func wasteImageViewGesture(){
@@ -173,6 +186,17 @@ class OrderViewController: UIViewController, UITextViewDelegate, UIScrollViewDel
             print("PrepareForSegue: image, ", image)
         }
         
+    }
+    
+    public func checkAllValue()
+    {
+        if addressLabel.tag == 0 && wasteImageView.image != UIImage(named: "addimage")  {
+            self.orderButton.alpha = 0.5
+            self.orderButton.isEnabled = false
+        } else {
+            self.orderButton.isEnabled = true
+            self.orderButton.alpha = 1
+        }
     }
 
 }
@@ -214,6 +238,8 @@ extension OrderViewController{
         addressLabel.text = "Belum menentukan alamat"
         
         catatanTF.text = ""
+        
+        checkAllValue()
 
         
     }

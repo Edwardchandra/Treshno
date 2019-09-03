@@ -20,6 +20,8 @@ class OrderReviewViewController: UIViewController {
     var wasteCollector: String = ""
     var currentDate: String = ""
     var currentTime: String = ""
+    var url: URL!
+    var email: String = ""
     
     var flag: Int = 0
     
@@ -35,23 +37,15 @@ class OrderReviewViewController: UIViewController {
         
         self.navigationItem.title = "Pesanan Selesai"
         self.navigationItem.setHidesBackButton(true, animated:true)
-//        self.navigationItem.title = ""
-        
-        //let cancelButton = UIBarButtonItem.init(image: UIImage(named: "unavailable"), style: .plain, target: self, action: #selector(cancelAction))
-        
-        //self.navigationController?.navigationItem.leftBarButtonItem = cancelButton
-        
         wasteCollectorName.text = wasteCollector
         wasteImageView.image = wasteImage
         pickUpLocation.text = destination
+        email = UserDefaults.standard.string(forKey: "emailUser") ?? ""
         
         customizeButton()
-//
-//        let data = wasteImage!.pngData(); // UIImage -> NSData, see also UIImageJPEGRepresentation
-//
         let data = wasteImage!.jpegData(compressionQuality: 0.1)
         
-        let url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
+        url = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(NSUUID().uuidString+".dat")
         do {
             try data!.write(to: url!, options: [])
         } catch let e as NSError {
@@ -65,12 +59,7 @@ class OrderReviewViewController: UIViewController {
         print(currentDate)
         print(CKAsset(fileURL: url!))
         
-        saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!))
-        
-        actIndicator.startAnimating()
-        actIndicator.hidesWhenStopped = true
-        finishButton.isEnabled = false
-        finishButton.backgroundColor = UIColor.lightGray
+        saveToCloudKit(name: wasteCollector, dest: destination, currDate: currentDate, currTime: currentTime, image: CKAsset(fileURL: url!), email: email)
     }
     
     @objc func cancelAction(){
@@ -87,6 +76,8 @@ class OrderReviewViewController: UIViewController {
         
         if flag == 1{
             performSegue(withIdentifier: "unwindToMainPage", sender: self)
+        } else if flag == 2 {
+            saveToCloudKit(name: self.wasteCollector, dest: self.destination, currDate: self.currentDate, currTime: self.currentTime, image: CKAsset(fileURL: url!), email: email)
         }
     }
     
@@ -95,7 +86,7 @@ class OrderReviewViewController: UIViewController {
     }
     
     //MARK: Save data to CloudKit
-    func saveToCloudKit(name: String, dest: String, currDate: String, currTime: String, image: CKAsset){
+    func saveToCloudKit(name: String, dest: String, currDate: String, currTime: String, image: CKAsset, email: String){
         
         print("Uploading to Cloudkit")
         
@@ -106,35 +97,27 @@ class OrderReviewViewController: UIViewController {
         newHistory.setValue(currDate, forKey: "date")
         newHistory.setValue(currTime, forKey: "time")
         newHistory.setValue(image, forKey: "image")
+        newHistory.setValue(email, forKey: "email")
         
-        database.save(newHistory) { (record, error) in
-            print("Done upload to CK")
-            guard record != nil else {
-                print("Error found", error)
-                return}
-            print("success")
-            self.flag = 1
-            DispatchQueue.main.async {
-                self.finishButton.isEnabled = true
-                self.finishButton.backgroundColor = #colorLiteral(red: 0.9338529706, green: 0.314417243, blue: 0.05114612728, alpha: 1)
-                self.actIndicator.stopAnimating()
+        DispatchQueue.global().async {
+            self.database.save(newHistory) { (record, error) in
+                guard record != nil else {
+                    print("Error found", error)
+                    self.flag = 2
+                    return
+                }
+                print("success")
+                self.flag = 1
+                
             }
-            
         }
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    public func EnableButton()
+    {
+        self.finishButton.isEnabled = true
+        self.finishButton.backgroundColor = #colorLiteral(red: 0.9338529706, green: 0.314417243, blue: 0.05114612728, alpha: 1)
     }
-    */
-
 }
 
 extension OrderReviewViewController{

@@ -73,75 +73,7 @@ class OnboardViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x/414)
         pageControll.currentPage = Int(pageIndex)
-        
-//        let maximumHorizontalOffset: CGFloat = scrollView.contentSize.width - scrollView.frame.width
-//        let currentHorizontalOffset: CGFloat = scrollView.contentOffset.x
-//
-//        // vertical
-//        let maximumVerticalOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.height
-//        let currentVerticalOffset: CGFloat = scrollView.contentOffset.y
-//
-//        let percentageHorizontalOffset: CGFloat = currentHorizontalOffset / maximumHorizontalOffset
-//        let percentageVerticalOffset: CGFloat = currentVerticalOffset / maximumVerticalOffset
-//
-//        let percentOffset: CGPoint = CGPoint(x: percentageHorizontalOffset, y: percentageVerticalOffset)
-//
-//        if(percentOffset.x > 0 && percentOffset.x <= 0.33) {
-//            slides[0].onboardImageView.transform = CGAffineTransform(
-//                scaleX: (0.33-percentOffset.x)/0.33,
-//                y: (0.33-percentOffset.x)/0.33)
-//            slides[1].onboardImageView.transform = CGAffineTransform(
-//                scaleX: percentOffset.x/0.33,
-//                y: percentOffset.x/0.33)
-//
-//        } else if(percentOffset.x > 0.33 && percentOffset.x <= 0.66) {
-//            slides[1].onboardImageView.transform = CGAffineTransform(
-//                scaleX: (0.66-percentOffset.x)/0.33,
-//                y: (0.66-percentOffset.x)/0.33)
-//            slides[2].onboardImageView.transform = CGAffineTransform(
-//                scaleX: percentOffset.x/0.66,
-//                y: percentOffset.x/0.66)
-//        }
     }
-    
-//    func scrollView(_ scrollView: UIScrollView, didScrollToPercentageOffset percentageHorizontalOffset: CGFloat) {
-//        if(pageControll.currentPage == 0) {
-//
-//            let pageUnselectedColor: UIColor = fade(fromRed: 255/255, fromGreen: 255/255, fromBlue: 255/255, fromAlpha: 1, toRed: 103/255, toGreen: 58/255, toBlue: 183/255, toAlpha: 1, withPercentage: percentageHorizontalOffset * 3)
-//            pageControll.pageIndicatorTintColor = pageUnselectedColor
-////
-////
-//            let bgColor: UIColor = fade(fromRed: 103/255, fromGreen: 58/255, fromBlue: 183/255, fromAlpha: 1, toRed: 255/255, toGreen: 255/255, toBlue: 255/255, toAlpha: 1, withPercentage: percentageHorizontalOffset * 3)
-//            slides[pageControll.currentPage].backgroundColor = bgColor
-////
-//            let pageSelectedColor: UIColor = fade(fromRed: 81/255, fromGreen: 36/255, fromBlue: 152/255, fromAlpha: 1, toRed: 103/255, toGreen: 58/255, toBlue: 183/255, toAlpha: 1, withPercentage: percentageHorizontalOffset * 3)
-//            pageControll.currentPageIndicatorTintColor = pageSelectedColor
-//        }
-//    }
-    
-//    func fade(fromRed: CGFloat,
-//              fromGreen: CGFloat,
-//              fromBlue: CGFloat,
-//              fromAlpha: CGFloat,
-//              toRed: CGFloat,
-//              toGreen: CGFloat,
-//              toBlue: CGFloat,
-//              toAlpha: CGFloat,
-//              withPercentage percentage: CGFloat) -> UIColor {
-//
-//        let red: CGFloat = (toRed - fromRed) * percentage + fromRed
-//        let green: CGFloat = (toGreen - fromGreen) * percentage + fromGreen
-//        let blue: CGFloat = (toBlue - fromBlue) * percentage + fromBlue
-//        let alpha: CGFloat = (toAlpha - fromAlpha) * percentage + fromAlpha
-//
-//        // return the fade colour
-//        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-//    }
-    
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//
-//        setupSlideScrollView(guidelineSlides: slides)
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)

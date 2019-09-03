@@ -154,13 +154,6 @@ class LocationViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             
             manager.startUpdatingLocation()
-            
-//            let annotation = MKPointAnnotation()
-//            annotation.coordinate = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-//            annotation.title = "Pick Up Location"
-//            self.userMapView.addAnnotation(annotation)
-//
-//            self.locationPickedLabel.text = "Pick Up Location in \n\(latPinPoint), \(longPinPoint)"
         } else {
             print("PLease turn on location services or GPS")
         }

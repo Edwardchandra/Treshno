@@ -23,6 +23,10 @@ class HistoryDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        print(destination)
+//        print(wasteCollectorName)
+//        print(dateTime)
 
         wasteCollectorNameLabel.text = wasteCollectorName
         destinationLabel.text = destination

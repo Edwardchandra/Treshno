@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0420E6E12318DAA300DD1821 /* launchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0420E6E02318DAA300DD1821 /* launchViewController.swift */; };
 		043BE12B230EB2C3004D12B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043BE12A230EB2C3004D12B1 /* AppDelegate.swift */; };
 		043BE130230EB2C3004D12B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 043BE12E230EB2C3004D12B1 /* Main.storyboard */; };
 		043BE132230EB2C5004D12B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 043BE131230EB2C5004D12B1 /* Assets.xcassets */; };
@@ -36,7 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0420E6E02318DAA300DD1821 /* launchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = launchViewController.swift; sourceTree = "<group>"; };
+		04256485231E88E800515310 /* editProfil@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "editProfil@3x.png"; path = "../../../../../Downloads/asset MC3/editProfil@3x.png"; sourceTree = "<group>"; };
+		04256486231E88E800515310 /* editProfil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "editProfil@2x.png"; path = "../../../../../Downloads/asset MC3/editProfil@2x.png"; sourceTree = "<group>"; };
 		043BE127230EB2C3004D12B1 /* Minimum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minimum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		043BE12A230EB2C3004D12B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		043BE12F230EB2C3004D12B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +104,8 @@
 				B6DAD03C231321A300668E60 /* Minimum.entitlements */,
 				FCCA2A39230EB890007E6C8E /* Pages */,
 				043BE131230EB2C5004D12B1 /* Assets.xcassets */,
+				04256486231E88E800515310 /* editProfil@2x.png */,
+				04256485231E88E800515310 /* editProfil@3x.png */,
 				043BE133230EB2C5004D12B1 /* LaunchScreen.storyboard */,
 				043BE136230EB2C5004D12B1 /* Info.plist */,
 			);
@@ -158,7 +160,6 @@
 				B6DAD02F23131EA600668E60 /* LogInViewController.swift */,
 				B6DAD03023131EA600668E60 /* SignUpViewController.swift */,
 				B6DAD03A2313219300668E60 /* OnboardViewController.swift */,
-				0420E6E02318DAA300DD1821 /* launchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,7 +311,6 @@
 				FCCA2A45230EB97C007E6C8E /* LocationViewController.swift in Sources */,
 				B6DAD0432313C2CB00668E60 /* OngoingOrderViewController.swift in Sources */,
 				B625A9E4230FC93F00915B0A /* CustomAnnotation.swift in Sources */,
-				0420E6E12318DAA300DD1821 /* launchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Minimum/Minimum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C476YGMRCM;
+				DEVELOPMENT_TEAM = 9NAU7R3577;
 				INFOPLIST_FILE = Minimum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -486,7 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Minimum/Minimum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C476YGMRCM;
+				DEVELOPMENT_TEAM = 9NAU7R3577;
 				INFOPLIST_FILE = Minimum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

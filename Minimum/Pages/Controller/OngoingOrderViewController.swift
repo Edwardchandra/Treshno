@@ -88,21 +88,9 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         //set location manager delegate to view controller
         locationManager.delegate = self
         
-        //check the authorization status by the user
-//        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-//
-//            //start updating the location of the current position
-//            locationManager.startUpdatingLocation()
-//        } else {
-//
-//            //request permission to the user when is going to use it in the foreground
-//            locationManager.requestWhenInUseAuthorization()
-//        }
     }
     
     func navigate(){
-        //let sourceLocation = CLLocationCoordinate2D(latitude: -6.309411, longitude: 106.647424) // Depan Unilever
-//        let sourceLocation = CLLocationCoordinate2D(latitude: 37.785834, longitude: -122.406417)
         
         let sourceLocation = CLLocationCoordinate2D(latitude: -6.3102337, longitude: 106.6476994)
         
@@ -130,8 +118,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
                     andDestination: CLLocationCoordinate2D(
                         latitude: destinationLocation.latitude,
                         longitude: destinationLocation.longitude))
-        
-//        destinationLocationData = "\(latPinPoint), \(longPinPoint)"
         
     }
     
@@ -166,7 +152,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
         directionRequest.transportType = .automobile
         
         let directions = MKDirections(request: directionRequest)
-//        userMapView.removeOverlays(userMapView.overlays)
         
         directions.calculate {
             [weak self] (response, error) -> Void in
@@ -178,10 +163,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
                 
                 return
             }
-//
-//            for route in response.routes{
-//
-//            }
             
             self?.navigation.removeAll()
             let route = response.routes[0]//tujuan
@@ -194,9 +175,6 @@ class OngoingOrderViewController: UIViewController, MKMapViewDelegate, CLLocatio
             
             self?.userMapView.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
             print("Cek Polyline: ", route.polyline.coordinate)
-            
-            
-            //self.userMapView.setRegion(MKCoordinateRegion(rect), animated: true)
         }
     }
     
