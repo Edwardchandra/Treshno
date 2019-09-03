@@ -147,25 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				B6DAD0392313216B00668E60 /* Controller */,
-				B6DAD0382313216700668E60 /* View */,
-				B6DAD0372313216100668E60 /* Model */,
 				B6DAD0342313215800668E60 /* Accounts.storyboard */,
 			);
 			path = Accounts;
-			sourceTree = "<group>";
-		};
-		B6DAD0372313216100668E60 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		B6DAD0382313216700668E60 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B6DAD0392313216B00668E60 /* Controller */ = {
@@ -482,7 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Minimum/Minimum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9NAU7R3577;
+				DEVELOPMENT_TEAM = C476YGMRCM;
 				INFOPLIST_FILE = Minimum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -502,7 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Minimum/Minimum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9NAU7R3577;
+				DEVELOPMENT_TEAM = C476YGMRCM;
 				INFOPLIST_FILE = Minimum/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

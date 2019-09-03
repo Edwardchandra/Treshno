@@ -25,11 +25,6 @@ class Onboard: UIView {
     
     func customizeElement(){
         onboardSliderView.layer.cornerRadius = 11
-//        onboardSliderView.layer.shadowColor = UIColor.black.cgColor
-//        onboardSliderView.layer.shadowOpacity = 10
-//        onboardSliderView.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        onboardSliderView.layer.shadowRadius = 1
-//        onboardSliderView.co
     }
 
 }
